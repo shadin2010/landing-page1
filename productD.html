@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Luxury Box BD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* === ১) গ্লোবাল রিসেট ও বেসিক স্টাইল === */
+    *{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body{ background: #f5f7fb; color: #1e293b; }
+    a{ text-decoration: none; color: inherit; }
+    
+    /* === ২) ইনডেক্স ফাইলের মতো ম্যাচিং নেভিগেশন বার === */
+    .navbar{ display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #0d47a1; color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .logo{ font-size: 24px; font-weight: 800; }
+    .logo span{ color: #28a745; }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .back-btn { color: white; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    
+    /* ইনডেক্স ফাইলের কার্ট স্টাইল আইকন এবং লাল ব্যাজ */
+    .cart-icon-wrapper { position: relative; font-size: 22px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; transition: 0.2s; }
+    .cart-icon-wrapper:hover { opacity: 0.8; }
+    .cart-badge { position: absolute; top: -2px; right: -2px; background: #ff3838; color: white; font-size: 11px; font-weight: 700; border-radius: 50px; padding: 2px 6px; min-width: 18px; text-align: center; line-height: 1; border: 2px solid #0d47a1; }
+
+    /* === ৩) মেইন লেআউট (ডেস্কটপ গ্রিড) === */
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 4%; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .product-image-section { background: white; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; display: flex; justify-content: center; align-items: center; }
+    .product-image-section img { max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; }
+    
+    /* === ৪) প্রোডাক্ট ইনফো ও প্রাইসিং === */
+    .product-info-section { background: white; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; }
+    .product-title { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 12px; }
+    .price-area { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .old-price { color: #94a3b8; text-decoration: line-through; font-size: 15px; }
+    .new-price { color: #0d47a1; font-size: 26px; font-weight: 800; }
+    .discount-badge { background: red; color: white; padding: 3px 8px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+    
+    /* === ৫) সিলেক্ট ড্রপডাউনস === */
+    .option-group { margin-bottom: 15px; }
+    .option-group label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 13px; color: #334155; }
+    .option-group select { width: 100%; max-width: 350px; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; background: #f8fafc; outline: none; }
+    
+    /* === 六) ডুয়াল বাটন লেআউট (Buy & Cart) === */
+    .btn-group { display: flex; gap: 12px; margin-top: 25px; max-width: 350px; }
+    .btn-group button { flex: 1; padding: 14px; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .cart-btn { background: #e2e8f0; color: #0d47a1; border: 1px solid #cbd5e1 !important; }
+    .cart-btn:hover { background: #cbd5e1; }
+    .buy-btn { background: #28a745; color: white; }
+    .buy-btn:hover { background: #218838; }
+    
+    /* === 𦜪) ডেসক্রিপশন সেকশন === */
+    .description-section { max-width: 1200px; margin: 30px auto; padding: 0 4%; }
+    .description-box { background: white; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; }
+    .description-box h2 { font-size: 18px; font-weight: 800; margin-bottom: 15px; color: #0d47a1; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+    .desc-content { font-size: 14.5px; line-height: 1.7; color: #334155; }
+    .desc-content h3 { font-size: 15px; font-weight: 700; margin: 12px 0 4px; color: #111; }
+    .desc-content ul { list-style: none; }
+    .desc-content li { margin-bottom: 5px; display: flex; align-items: baseline; gap: 6px; }
+    .desc-content li::before { content: "✔"; color: #28a745; font-weight: bold; }
+    .dynamic-size-box { background: #f0fdf4; border: 1px dashed #28a745; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-weight: bold; color: #166534; display: inline-block; }
+
+    /* === ৮) বিশেষ মোবাইল রেসপন্সিভ মিডিয়া কোয়েরি (ছবি ছোট এবং টাইটেল একপাশে) === */
+    @media(max-width: 768px) {
+      .navbar { padding: 12px 4%; }
+      .logo { font-size: 20px; }
+      
+      /* কন্টেইনার ফ্লেক্সিবল করা হলো যাতে ভেতরে সবকিছু সিঙ্গেল কলামে সাজানো যায় */
+      .container { display: flex; flex-direction: column; gap: 12px; margin: 10px auto; padding: 0 3%; }
+      
+      /* ছবি এবং টাইটেল পাশাপাশি আনার জন্য একটি ফ্লেক্স রো জেনারেট করা হয়েছে */
+      .product-info-section { padding: 12px; display: flex; flex-direction: column; gap: 10px; border-radius: 12px; }
+      
+      /* মেইন ইমেজ সেকশনকে উপরে পাশাপাশি দেখানোর জন্য রো লেআউট */
+      .container { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      
+      /* উপরের অংশ: ইমেজ ও টাইটেল পাশাপাশি করার জন্য একটি কম্বাইন্ড গ্রিড বা ট্রিক ব্যবহার */
+      .container { display: flex; flex-direction: column; }
+      
+      /* এখানে আমরা ডাইনামিক স্টাইল শিফট ব্যবহার করছি: ছবি ও টেক্সট এরিয়া এক বক্সে রেন্ডার করার মতো লুক দেওয়া হয়েছে */
+      .product-image-section { background: white; padding: 10px; border-radius: 12px; width: 40%; float: left; margin-right: 3%; height: 140px; box-sizing: border-box; }
+      .product-image-section img { max-height: 120px; object-fit: contain; }
+      
+      /* ডাইনামিক পাশাপাশি লুকের জন্য সিএসএস গ্রিড ফিক্স */
+      .container { display: grid; grid-template-columns: 120px 1fr; gap: 12px; background: white; padding: 12px; border-radius: 14px; margin: 15px 3% 5px; border: 1px solid #e2e8f0; }
+      .product-image-section { background: transparent; padding: 0; border: none; width: 100%; height: 120px; }
+      .product-image-section img { max-height: 120px; width: 100%; }
+      
+      /* প্রোডাক্ট ইনফো সেকশন এবার ডানপাশে টাইটেল ও প্রাইস দেখাবে */
+      .product-info-section { background: transparent; padding: 0; border: none; justify-content: center; }
+      .product-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .price-area { margin-bottom: 0; gap: 6px; flex-wrap: wrap; }
+      .new-price { font-size: 18px; }
+      .old-price { font-size: 12px; }
+      .discount-badge { font-size: 10px; padding: 2px 6px; }
+      
+      /* ড্রপডাউন এবং বাটনগুলোকে ছবির নিচ থেকে ফুল উইডথ করার জন্য আরেকটি কন্টেইনার হিসেবে রেন্ডার করা */
+      /* এগুলো যাতে গ্রিডের বাইরে নিচে ফুল স্ক্রিন পায় সেজন্য গ্রিড কলাম স্প্যান করা হলো */
+      .option-group, .btn-group { grid-column: span 2; }
+      .option-group { margin-bottom: 10px; }
+      .option-group label { font-size: 12px; margin-bottom: 4px; }
+      .option-group select { padding: 8px; font-size: 13px; max-width: 100%; }
+      
+      .btn-group { gap: 8px; margin-top: 10px; max-width: 100%; }
+      .btn-group button { padding: 12px 6px; font-size: 13px; border-radius: 6px; }
+      
+      /* ডেসক্রিপশন সেকশন মোবাইল ফ্রেন্ডলি */
+      .description-section { margin: 10px auto; padding: 0 3%; }
+      .description-box { padding: 15px; border-radius: 12px; }
+      .description-box h2 { font-size: 15px; margin-bottom: 10px; }
+      .desc-content { font-size: 13px; line-height: 1.6; }
+      .dynamic-size-box { font-size: 12px; padding: 6px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ইনডেক্স পেজের ম্যাজিক নেভিগেশন বার -->
+  <nav class="navbar">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> হোম</a>
+    <div class="logo">Luxury Box <span>BD</span></div>
+    
+    <div class="nav-links">
+      <!-- ক্লিক করলেই সরাসরি আপনার চেকআউট/কার্ট পেজে (product.html) নিয়ে যাবে -->
+      <a href="product.html" class="cart-icon-wrapper">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cartCount">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- প্রোডাক্ট কন্টেইনার (মোবাইলে ইমেজ ও টাইটেল পাশাপাশি দেখাবে) -->
+  <main class="container">
+    <div class="product-image-section">
+      <img id="prodImage" src="" alt="Product">
+    </div>
+    
+    <div class="product-info-section">
+      <h1 class="product-title" id="prodTitle">Loading...</h1>
+      
+      <div class="price-area">
+        <span class="old-price" id="prodOldPrice">৳0</span>
+        <span class="new-price" id="prodNewPrice">৳0</span>
+        <span class="discount-badge" id="prodDiscount">-0%</span>
+      </div>
+    </div>
+
+    <!-- সাইজ, কালার ও বাটন গ্রিডের নিচে ফুল উইডথ পাবে -->
+    <div class="option-group">
+      <label>সাইজ (Size) সিলেক্ট করুন:</label>
+      <select id="prodSize" onchange="updateDynamicSpecs()"></select>
+    </div>
+    
+    <div class="option-group">
+      <label>কালার (Color) সিলেক্ট করুন:</label>
+      <select id="prodColor"></select>
+    </div>
+    
+    <div class="btn-group">
+      <button class="cart-btn" onclick="handleCartAction(false)"><i class="fa-solid fa-cart-plus"></i> Cart</button>
+      <button class="buy-btn" onclick="handleCartAction(true)"><i class="fa-solid fa-bag-shopping"></i> Buy Now</button>
+    </div>
+  </main>
+
+  <!-- ডেসক্রিপশন সেকশন -->
+  <section class="description-section">
+    <div class="description-box">
+      <h2>পণ্যের বিস্তারিত বিবরণ (Product Details)</h2>
+      <div class="desc-content" id="prodDescription"></div>
+    </div>
+  </section>
+
+  <script>
+    // --- ১) ডাটাবেজ (index.html এর সাথে হুবহু ম্যাচিং) ---
+    const productsData = [
+      { id: 'bangle-4', img: '/Images/coribox1.jpeg', name: 'Premium 5 Roll Bangle Organizer Box – Velvet Interior & Glass Top (Red)', oldP: ' 2250', newP: '1560', disc: '30', sizes: ['5 Roll'], colors: ['red', 'Cream'] },
+      { id: 'bangle-3', img: '/Images/coribox2.jpeg', name: '5 Roll Velvet Bangle Organizer Box with Glass Top | Cream Color', oldP: '2250', newP: '1560', disc: '30', sizes: ['5 Roll'], colors: ['Cream', 'Red'] },
+      { id: 'bangle-5', img: '/Images/coribox3.jpeg', name: 'Premium 4 Roll Bangle Organizer Box', oldP: '1990', newP: '1290', disc: ' 35', sizes: ['4 Roll'], colors: ['Maroon', 'Black'] },
+      { id: 'churi-10-1', img: '/Images/coribox4.jpeg', name: 'Premium 4 Roll Bangle Organizer Box with Black & Off-white', oldP: '1990', newP: '1290', disc: '35', sizes: ['4 Roll'], colors: ['Black & Off-white'] },
+      { id: 'churi-10-2', img: '/Images/coribox5.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top | Cream Color', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Roll'], colors: ['Cream '] },
+      { id: 'churi-10-3', img: '/Images/coribox6.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Roll'], colors: ['red' , 'Cream'] },
+      { id: 'churi-7', img: '/Images/coribox7.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Row'], colors: ['red'] },
+      { id: 'churi-8', img: '/Images/coribox8.jpeg', name: 'Premium Single Roll Bangle Organizer Box – Velvet Interior & Glass Top', oldP: '990', newP: '750', disc: '24', sizes: ['Single Roll'], colors: [ 'Red'] },
+      { id: 'churi-9', img: '/Images/coribox9.jpeg', name: 'Premium Single Roll Bangle Organizer Box – Velvet Interior & Glass Top', oldP: '990', newP: '750', disc: '24', sizes: ['Single Roll'], colors: ['Red', 'White'] },
+      { id: 'churi-10-4', img: '/Images/watchbox1.jpeg', name: 'Classic Wooden Watch Box – 6-Slot Organizer with Glass Lid & Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-2', img: '/Images/watchbox2.jpeg', name: 'Classic Wooden Watch Box – 6-Slot Organizer with Glass Lid & Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-3', img: '/Images/watchbox3.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 6 Slot Luxury Organizer with Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-4', img: '/Images/watchbox4.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 12 Slot Luxury Organizer with Key Lock', oldP: '2350', newP: '1550', disc: '34', sizes: ['12 Slot'], colors: [' Light Brown'] },
+      { id: 'watch-5', img: '/Images/watchbox5.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 12 Slot Luxury Organizer with Key Lock', oldP: '2350', newP: '1550', disc: '34', sizes: ['12 Slot'], colors: ['Light Brown'] },
+      { id: 'ring-1', img: '/Images/ringbox1.jpeg', name: ' Premium Quality 6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
+      { id: 'ring-2', img: '/Images/ringbox2.jpeg', name: ' 6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
+      { id: 'ring-3', img: '/Images/ringbox3.jpeg', name: ' Premium Quality 6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
+      { id: 'ring-4', img: '/Images/ringbox4.jpeg', name: ' 6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
+    ];
+
+    // --- ২) ডেসক্রিপশন ডাটা অবজেক্ট ---
+    const descriptions = {
+      ring: `<p><strong>পন্যের বিবরণ:</strong><br>আপনার মূল্যবান আংটিগুলো রাখুন গুছানো, নিরাপদ ও স্টাইলিশভাবে। এই প্রিমিয়াম 6 Slot Ring Storage Box আংটিকে স্ক্র্যাচ, ধুলা ও ড্যামেজ থেকে সুরক্ষা দেয় এবং আপনার ড্রেসিং টেবিলে যোগ করে এলিগেন্ট লুক। Transparent glass top থাকার কারণে বক্স না খুলেই সহজে আপনার রিং কালেকশন দেখতে পারবেন।</p>
+             <h3>📦 প্রোডাক্টের ম্যাটেরিয়াল</h3><p>বোর্ড, PU লেদার, ট্রান্সপারেন্ট গ্লাস, মেটাল লক এবং সফট ভেলভেট কাপড়ের সমন্বয়ে তৈরি।</p>
+             <h3>📏 Size</h3><div class="dynamic-size-box">Length: 8 inch | Width: 6 inch | Height: 2 inch</div>
+             <h3>🎯 Storage Capacity</h3><ul><li>6 Slot for Rings</li><li>Small jewellery organizer</li><li>Gift item</li></ul>`,
+      bangle: `<p><strong>পন্যের বিবরণ:</strong><br>কম জায়গায় আপনার প্রিয় চুড়িগুলো রাখার জন্য পারфেক্ট সল্যুশন। এই Storage Box ছোট হলেও প্রিমিয়াম ফিনিশ ও নিরাপদ স্টোরেজ নিশ্চিত করে। ভ্রমণ,技фট বা ব্যক্তিগত ব্যবহারের জন্য আদর্শ।</p>
+               <h3>📦 ম্যাটেরিয়াল</h3><p>বোর্ড, PU লেদার, ট্রান্সপারেন্ট গ্লাস, মেটাল লক এবং সফট ভেলভেট কাপড়ের সমন্বয়ে তৈরি।</p>
+               <h3>📏 Size (সিলেক্টেড রোল অনুযায়ী সাইজ)</h3><div class="dynamic-size-box" id="bangleDynamicSize">Loading Size...</div>
+               <h3>🎯 Use Case</h3><ul><li>Bangle storage & Travel box</li><li>Gift item</li><li>Small jewellery organizer</li></ul>`,
+      watch: `<p><strong>পণ্যের বিবরণ ও ওভারভিউ:</strong><br>এই ক্লাসিক কাঠের ওয়াচ বক্সের মাধ্যমে আপনার শখের ঘড়িগুলোকে একই সাথে সুরক্ষিত রাখুন এবং একটি স্টাইলিশ ও রাজকীয় লোক ফুটিয়ে তুলুন। প্রিমিয়াম প্রাকৃতিক কাঠের চমৎকার টেক্সচার ও ফিনিশিং দিয়ে এটি তৈরি করা হয়েছে।</p>
+              <h3>✨ মূল বৈশিষ্ট্যসমূহ (Key Features)</h3><ul>
+              <li><strong>প্রিমিয়াম উডেন ফিনিশ:</strong> চমৎকার ও লাক্সারিয়াস লুক নিশ্চিত করতে হাই-কোয়ালিটি ব্রাউন উড দিয়ে তৈরি।</li>
+              <li><strong>নিরাপদ কি-লক সিস্টেম:</strong> আপনার পুরো ঘড়ি কালেকশনকে সুরক্ষিত রাখতে এর সাথে রয়েছে ম্যাচিং মেটাল চাবি।</li>
+              <li><strong>সফট ভেলভেট ইন্টেরিয়র লাইনিং:</strong> নরম ভেলভেট কাপড় ঘড়িকে যেকোনো স্ক্র্যাচ ও ড্যামেজ থেকে রক্ষা করে।</li>
+              <li><strong>ক্লিয়ার গ্লাস ডিসপ্লে:</strong> ওপরের স্বচ্ছ ক্রিস্টাল গ্লাসের কারণে বক্স না খুলেই ঘড়ি কালেকশন দেখা যায়।</li></ul>`
+    };
+
+    // --- ৩) URL ট্র্যাকিং ও ডেটা রেন্ডারিং মেকানিজম ---
+    const productId = new URLSearchParams(window.location.search).get('id');
+    const product = productsData.find(p => p.id === productId);
+
+    if (product) {
+      document.getElementById('prodTitle').innerText = product.name;
+      document.getElementById('prodImage').src = product.img;
+      document.getElementById('prodOldPrice').innerText = '৳' + product.oldP;
+      document.getElementById('prodNewPrice').innerText = '৳' + product.newP;
+      document.getElementById('prodDiscount').innerText = '-' + product.disc + '%';
+
+      const fillSelect = (id, data) => {
+        const el = document.getElementById(id);
+        data.forEach(item => el.innerHTML += `<option value="${item}">${item}</option>`);
+      };
+      fillSelect('prodSize', product.sizes);
+      fillSelect('prodColor', product.colors);
+
+      let type = product.id.includes('ring') ? 'ring' : (product.id.includes('bangle') || product.id.includes('churi') ? 'bangle' : 'watch');
+      document.getElementById('prodDescription').innerHTML = descriptions[type] || "<p>বিস্তারিত বিবরণ শীঘ্রই আসছে...</p>";
+      
+      updateDynamicSpecs();
+    } else {
+      document.getElementById('prodTitle').innerText = "প্রোডাক্টটি পাওয়া যায়নি!";
+    }
+
+    // প্রথমবার পেজ লোড হবার সময় কার্ট নোটিফিকেশন ব্যাজ সংখ্যা বসানো
+    updateNavbarCartCount();
+
+    // --- ৪) চুরির বক্সের সাইজ ট্র্যাকার ---
+    function updateDynamicSpecs() {
+      if (!product) return;
+      const sizeVal = document.getElementById('prodSize').value.trim();
+      const sizeBox = document.getElementById('bangleDynamicSize');
+      
+      if (sizeBox) {
+        if (sizeVal.includes('5 Roll')) sizeBox.innerText = "Length: 16 inch | Width: 8 inch | Height: 5 inch";
+        else if (sizeVal.includes('4 Roll')) sizeBox.innerText = "Length: 13.5 inch | Width: 8 inch | Height: 4 inch";
+        else if (sizeVal.includes('3 Roll') || sizeVal.includes('3 Row')) sizeBox.innerText = "Length: 10 inch | Width: 7 inch | Height: 4 inch";
+        else sizeBox.innerText = "Length: 12 inch | Width: 4 inch | Height: 4 inch (Single Roll)";
+      }
+    }
+
+    // --- ৫) ইনডেক্স ফাইলের মতো লাইভ লাল ব্যাজ কাউন্টার আপডেট ---
+    function updateNavbarCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+      let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cartCount').innerText = totalItems;
+    }
+
+    // --- ৬) কার্ট ও বাই অ্যাকশন ফাংশন ---
+    function handleCartAction(isBuyNow = false) {
+      if (!product) return;
+      
+      let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+      let size = document.getElementById('prodSize').value;
+      let color = document.getElementById('prodColor').value;
+      
+      let exist = cart.find(item => item.id === product.id && item.size === size && item.color === color);
+      if (exist) {
+        exist.quantity += 1;
+      } else {
+        cart.push({ id: product.id, name: product.name, price: parseInt(product.newP), image: product.img, size, color, quantity: 1 });
+      }
+      
+      localStorage.setItem("cartProducts", JSON.stringify(cart));
+      
+      // লাইভ লাল নোটিফিকেশন ব্যাজ সংখ্যা আপডেট
+      updateNavbarCartCount();
+      
+      if (isBuyNow) {
+        window.location.href = 'product.html'; 
+      } else {
+        alert('কার্টে সফলভাবে যোগ হয়েছে!');
+      }
+    }
+  </script>
+</body>
+</html>

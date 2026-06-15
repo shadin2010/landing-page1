@@ -1,0 +1,492 @@
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#111;
+}
+
+/* NAVBAR */
+
+.navbar{
+  width:100%;
+  height:70px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+/* LEFT */
+
+.left-nav{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+/* MENU */
+
+.menu-container{
+  position:relative;
+}
+
+.menu-trigger{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  color:white;
+  font-size:18px;
+}
+
+/* DROPDOWN */
+
+.dropdown-menu{
+  position:absolute;
+  top:45px;
+  left:0;
+  background:white;
+  width:260px;
+  border-radius:10px;
+  overflow:hidden;
+  display:none;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+.dropdown-menu a{
+  display:block;
+  padding:15px;
+  text-decoration:none;
+  color:black;
+  border-bottom:1px solid #ddd;
+  transition:0.3s;
+  font-size:15px;
+}
+
+.dropdown-menu a:hover{
+  background:black;
+  color:white;
+  padding-left:25px;
+}
+
+.menu-container:hover .dropdown-menu{
+  display:block;
+}
+
+/* ICON */
+
+.left-nav i{
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* LOGO */
+
+.logo{
+  color:white;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:gold;
+}
+
+/* RIGHT */
+
+.cart{
+  position:relative;
+}
+
+.cart i{
+  color:white;
+  font-size:22px;
+}
+
+.cart span{
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  width:20px;
+  height:20px;
+  background:red;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL & FONTS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* ==========================================================================
+   SLIDER
+   ========================================================================== */
+.hero {
+    width: 100%;
+    padding: 20px;
+}
+
+.slider {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   SLIDER BUTTON
+   ========================================================================== */
+#prev,
+#next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#prev { left: 20px; }
+#next { right: 20px; }
+
+/* ==========================================================================
+   PRODUCTS
+   ========================================================================== */
+.products {
+    padding: 40px 20px;
+}
+
+.products h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 35px;
+    color: #0d47a1;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* --- COMPACT & STYLISH PRODUCT CARD --- */
+.product-card {
+    background: #ffffff;
+    width: 100%; /* গ্রিডের সাথে ফিট হওয়ার জন্য ১০০% করা হলো */
+    max-width: 280px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #eee;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #ff3b3b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(255, 59, 59, 0.3);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.info {
+    padding: 15px;
+    text-align: center;
+}
+
+.info h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #222;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.old {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+}
+
+.new {
+    color: #0d47a1;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.info button {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0d47a1;
+    border-radius: 8px;
+    background: transparent;
+    color: #0d47a1;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.info button:hover {
+    background: #0d47a1;
+    color: white;
+    box-shadow: 0 5px 15px rgba(13, 71, 161, 0.3);
+}
+
+.size-btn.active {
+    background: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+/* ==========================================================================
+   NEW STYLISH FOOTER DESIGN (CSS)
+   ========================================================================== */
+footer {
+    background-color: #111111; /* গ্লসি ডার্ক থিম */
+    color: #b0b0b0;
+    padding: 60px 0 30px 0;
+    font-family: Arial, sans-serif;
+    border-top: 4px solid #28a745; /* উপরে প্রিমিয়াম গ্রীন বর্ডার */
+    margin-top: 50px;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ফুটার মেনু লিংকসমূহ */
+.footer-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.footer-menu ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.footer-menu ul li a:hover {
+    color: #28a745;
+    transform: translateY(-2px);
+}
+
+/* সোশ্যাল মিডিয়া আইকন সেকশন */
+.social_links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social_links ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* সোশ্যাল আইকন হোভার কালার স্কিম */
+.social_links ul li a.facebook:hover { background-color: #3b5998; color: #fff; transform: translateY(-5px); }
+.social_links ul li a.twitter:hover { background-color: #000000; color: #fff; transform: translateY(-5px); }
+.social_links ul li a.instagram:hover { background-color: #e1306c; color: #fff; transform: translateY(-5px); }
+.social_links ul li a.youtube:hover { background-color: #ff0000; color: #fff; transform: translateY(-5px); }
+
+/* কপিরাইট এরিয়া */
+.copyright_text {
+    width: 100%;
+    border-top: 1px solid #222222;
+    padding-top: 25px;
+    margin-top: 10px;
+}
+
+.copyright_text p {
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.copyright_text p a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.copyright_text p a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE & MOBILE
+   ========================================================================== */
+@media (max-width: 850px) {
+    .details-container {
+        grid-template-columns: 1fr;
+    }
+    .right-side {
+        position: static;
+    }
+    .details-content h1 {
+        font-size: 2rem;
+    }
+}
+
+@media(max-width:768px){
+    .navbar {
+        padding: 12px;
+    }
+    .logo {
+        font-size: 22px;
+    }
+    .slider {
+        height: 230px;
+    }
+    .details-container {
+        flex-direction: column;
+    }
+    .details-content h1 {
+        font-size: 28px;
+    }
+    .price-box .new {
+        font-size: 28px;
+    }
+    .footer-menu ul {
+        gap: 20px;
+    }
+    .footer-menu ul li a {
+        font-size: 14px;
+    }
+}

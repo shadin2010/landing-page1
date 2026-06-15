@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Luxury Box BD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; overflow-x: hidden; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; color: white; padding: 15px 5%; background: #0d47a1; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .left-nav { display: flex; align-items: center; gap: 20px; }
+    .logo { font-size: 24px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; }
+    .logo span { color: #28a745; }
+    .cart { position: relative; cursor: pointer; font-size: 18px; }
+    .cart span { position: absolute; top: -10px; right: -10px; background: red; color: #fff; border-radius: 50%; padding: 2px 6px; font-size: 12px; }
+    .menu-container { position: relative; display: inline-block; }
+    .menu-trigger { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: bold; }
+    .dropdown-menu { display: block; position: absolute; top: 130%; left: 0; background: #1f1f1f; min-width: 200px; box-shadow: 0px 10px 25px rgba(0,0,0,0.4); border-radius: 8px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: 999; border: 1px solid #333; }
+    .menu-container:hover .dropdown-menu, .menu-container.active .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a { color: #eee; padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; transition: all 0.2s ease; }
+    .dropdown-menu a:hover { background: #28a745; color: #fff; padding-left: 25px; }
+    footer { background: #111111; color: white; padding: 30px 5%; text-align: center; margin-top: 50px; border-top: 1px solid #222; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .footer-menu ul, .social_links ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 30px; margin: 0; }
+    .footer-menu a, .social_links a { color: #bbb; text-decoration: none; transition: 0.2s; }
+    .footer-menu a:hover, .social_links a:hover { color: #28a745; }
+    .copyright_text a { color: #28a745; text-decoration: none; font-weight: bold; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    .animate-page-entry { animation: fadeInUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+    .box-4d { background: #ffffff; box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.05), 0 5px 15px -5px rgba(0, 0, 0, 0.02); border: 1px solid #e1e8f0; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .box-4d:hover { transform: translateY(-4px); box-shadow: 0 25px 45px -10px rgba(13, 71, 161, 0.08); }
+    .input-4d { transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .input-4d:focus { border-color: #28a745; box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.15), 0 8px 16px -4px rgba(40, 167, 69, 0.1); transform: scale(1.01); }
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.5), 0 4px 0 0 #1e7e34; } 70% { box-shadow: 0 0 0 12px rgba(40, 167, 69, 0), 0 4px 0 0 #1e7e34; } 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0), 0 4px 0 0 #1e7e34; } }
+    .btn-4d { animation: pulseGlow 2s infinite; box-shadow: 0 4px 0 0 #1e7e34; transition: all 0.1s ease; }
+    .btn-4d:hover { background: #218838; }
+    .btn-4d:active { transform: translateY(4px); box-shadow: 0 0px 0 0 #1e7e34 !important; animation: none; }
+
+    @media (max-width: 1023px) {
+      .responsive-grid { display: grid !important; grid-template-columns: 1.1fr 0.9fr !important; gap: 12px !important; }
+      .box-4d { padding: 14px !important; border-radius: 12px !important; }
+      main { padding: 8px !important; }
+      #cart-items-container { max-height: 200px !important; }
+      .text-xl { font-size: 15px !important; padding-bottom: 8px !important; }
+      label { font-size: 12px !important; margin-bottom: 4px !important; }
+      input, select, textarea { padding: 8px !important; font-size: 13px !important; border-radius: 8px !important; }
+      .btn-4d { padding: 10px !important; font-size: 14px !important; border-radius: 8px !important; }
+    }
+    @media (max-width: 550px) { .responsive-grid { grid-template-columns: 1fr !important; } }
+  </style>
+</head>
+<body class="bg-[#fcfdfe]">
+
+  <nav class="navbar">
+    <div class="left-nav">
+      <div class="menu-container" id="myMenu">
+        <div class="menu-trigger"><i class="fa-solid fa-bars"></i> <span>Menu</span></div>
+        <div class="dropdown-menu">
+          <a href="index.html">Home</a>
+          <a href="/Pages/watch.html">Watch organiser storage box</a>
+          <a href="/Pages/bangles.html">Bangles organiser storage box</a>
+          <a href="/Pages/ring.html">Ring organiser storage box</a>
+        </div>
+      </div>
+      <i class="fa-solid fa-search"></i>
+    </div>
+    <div class="logo" onclick="location.href='index.html'">Luxury Box<span> BD </span></div>
+    <div class="right-nav">
+      <div class="cart"><i class="fa-solid fa-cart-shopping"></i><span id="cart-count">0</span></div>
+    </div>
+  </nav>
+
+  <main class="p-4 md:p-8 min-h-[70vh] animate-page-entry">
+    <div class="max-w-6xl mx-auto mt-4">
+      <form id="checkout_form" action="https://script.google.com/macros/s/AKfycbycUFd8zSCyO0uuQMlx-idFSUOmV0F-ekz6uvYeHCFCnalel9aGRp_o32TzJ43zzFy_/exec" method="POST">
+        
+        <input type="hidden" name="Product_Details" id="hidden-product-details">
+        <input type="hidden" name="Total_Bill" id="hidden-grand-total">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 responsive-grid">
+          
+          <!-- বাম পাশ: ডেলিভারি ফর্ম -->
+          <div class="lg:col-span-7 p-6 md:p-8 rounded-2xl box-4d space-y-5">
+            <h3 class="text-xl font-bold text-gray-800 border-b border-gray-100 pb-4 flex items-center gap-2">
+              <i class="fa-solid fa-truck text-[#0d47a1]"></i> আমাদের ডেলিভারি Form
+            </h3>
+            
+            <div>
+              <label class="block text-gray-600 text-sm font-semibold mb-1.5">আপনার নাম <span class="text-red-500">*</span></label>
+              <input type="text" name="Name" required placeholder="আপনার সম্পূর্ণ নাম লিখুন" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800">
+            </div>
+
+            <div>
+              <label class="block text-gray-600 text-sm font-semibold mb-1.5">মোবাইল নাম্বার <span class="text-red-500">*</span></label>
+              <input type="tel" name="Mobile" required placeholder="যেমন: 017XXXXXXXX" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-gray-600 text-sm font-semibold mb-1.5">জেলা <span class="text-red-500">*</span></label>
+                <input type="text" name="District" id="district-input" list="district-list" required placeholder="খুঁজুন (যেমন: ঢাকা)" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800" autocomplete="off">
+                <datalist id="district-list"></datalist>
+              </div>
+              <div>
+                <label class="block text-gray-600 text-sm font-semibold mb-1.5">উপজেলা / থানা <span class="text-red-500">*</span></label>
+                <input type="text" name="Upazila" id="upazila-input" list="upazila-list" required placeholder="আগে জেলা সিলেক্ট করুন" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800" disabled autocomplete="off">
+                <datalist id="upazila-list"></datalist>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-gray-600 text-sm font-semibold mb-1.5">পূর্ণাঙ্গ ঠিকানা <span class="text-red-500">*</span></label>
+              <textarea name="Address" rows="2" required placeholder="আপনার রোড নম্বর, বাড়ি নম্বর বা এলাকার নাম বিস্তারিত লিখুন" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-gray-600 text-sm font-semibold mb-1.5">ডেলিভারি এরিয়া <span class="text-red-500">*</span></label>
+              <select id="delivery-option" name="Delivery Charge" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800 cursor-pointer">
+                <option value="70">ঢাকার ভেতরে (৭০ ৳)</option>
+                <option value="130">ঢাকার বাইরে (১৩০ ৳)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-gray-600 text-sm font-semibold mb-1.5">অর্ডার নোট / কোনো মন্তব্য (ঐচ্ছিক)</label>
+              <textarea name="Notes" rows="2" placeholder="প্রোডাক্টের কালার বা ডেলিভারি নিয়ে কোনো অনুরোধ থাকলে..." class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800 resize-none"></textarea>
+            </div>
+          </div>
+
+          <!-- ডান পাশ: কার্ট লিস্ট ও বিল ডাটা -->
+          <div class="lg:col-span-5 p-6 rounded-2xl box-4d flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 border-b border-gray-100 pb-4 flex items-center gap-2">
+                <i class="fa-solid fa-basket-shopping text-[#0d47a1]"></i> আপনার কার্ট লিস্ট
+              </h3>
+              <div id="cart-items-container" class="space-y-4 max-h-[350px] overflow-y-auto pr-2 mt-2"></div>
+            </div>
+
+            <div class="mt-6 border-t border-gray-100 pt-4">
+              <div class="space-y-3 text-sm text-gray-500">
+                <div class="flex justify-between"><span>পণ্যের উপ-মোট</span><span id="sub-total" class="font-semibold text-gray-800">0 ৳</span></div>
+                <div class="flex justify-between"><span>ডেলিভারি চার্জ</span><span id="delivery-charge" class="font-semibold text-gray-800">70 ৳</span></div>
+              </div>
+              
+              <div class="flex justify-between items-center pt-4 mt-4 border-t border-gray-100 mb-6">
+                <span class="text-lg font-bold text-gray-800">সর্বমোট বিল</span>
+                <span id="grand-total" class="text-2xl font-black text-[#28a745]">0 ৳</span>
+              </div>
+              
+              <button type="submit" class="confirm-btn btn-4d w-full bg-[#28a745] text-white text-lg font-bold py-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-menu">
+        <ul>
+          <li><a href="/Pages/ourabout.html">আমাদের সম্পর্কে</a></li>
+          <li><a href="/Pages/delivaryrol.html">ডেলিভারি পলিসি</a></li>
+          <li><a href="/Pages/returnpolisy.html">রিটার্ন পলিসি</a></li>
+        </ul>
+      </div>
+      <div class="social_links">
+        <ul>
+          <li><a target="_blank" href="https://www.facebook.com/share/1HxRwJXoAk/"><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li><a target="_blank" href="https://www.instagram.com/bdluxurybox?igsh=MXZ1MG9pMHJzbnVnMw=="><i class="fa-brands fa-instagram"></i></a></li>
+        </ul>
+      </div>
+      <div class="copyright_text"><p><i class="fa-regular fa-copyright"></i> 2026 <a href="https://oceansdreams.com" target="_blank">Luxury Box BD</a>. All Rights Reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const bdData = {
+      "Dhaka District / ঢাকা জেলা": ["Savar / সাভার", "Dhamrai / ধামরাই", "Keraniganj / কেরানীগঞ্জ", "Nawabganj / নবাবগঞ্জ", "Dohar / দোহার"],
+      "Dhaka City / ঢাকা সিটি কর্পোরেশন": ["Dhaka North City / ঢাকা উত্তর সিটি", "Dhaka South City / ঢাকা দক্ষিণ সিটি"],
+      "Gazipur / গাজীপুর": ["Gazipur Sadar / গাজীপুর সদর", "Kaliakair / কালিয়াকৈড়", "Kaliganj / কালীগঞ্জ", "Kapasia / কাপাসিয়া", "Sreepur / শ্রীপুর"],
+      "Narayanganj / নারায়ণগঞ্জ": ["Narayanganj Sadar / নারায়ণগঞ্জ সদর", "Araihazar / আড়াইহাজার", "Bandar / বন্দর", "Rupganj / রূপগঞ্জ", "Sonargaon / সোনারগাঁও"],
+      "Narsingdi / নরসিংদী": ["Narsingdi Sadar / নরসিংদী সদর", "Belabo / বেলাবো", "Monohardi / মনোহরদী", "Palash / পলাশ", "Raipura / রায়পুরা", "Shibpur / শিবপুর"],
+      "Munshiganj / মুन्সীগঞ্জ": ["Munshiganj Sadar / মুন্সীগঞ্জ সদর", "Gazaria / গজারিয়া", "Louhajong / লৌহজং", "Sirajdikhan / সিরাজদিখান", "Srinagar / শ্রীনগর", "Tongibari / টঙ্গীবাড়ী"],
+      "Manikganj / মানিকগঞ্জ": ["Manikganj Sadar / মানিকগঞ্জ সদর", "Daulatpur / দৌলতপুর", "Ghior / ঘিওর", "Harirampur / হরিরামপুর", "Saturia / সাটুরিয়া", "Shibalaya / শিবালয়", "Singair / সিঙ্গাইর"],
+      "Faridpur / ফরিদপুর": ["Faridpur Sadar / ফরিদপুর সদর", "Alfadanga / আলফাডাঙ্গা", "Bhanga / ভাঙ্গা", "Boalmari / বোয়ালমারী", "Charbhadrasan / চরভদ্রাসন", "Madhukhali / মধুখালী", "Nagarkanda / নগরকান্দা", "Saltha / সালথা"],
+      "Rajbari / রাজবাড়ী": ["Rajbari Sadar / রাজবাড়ী সদর", "Baliakandi / বালিয়াকান্দি", "Goalanda / গোয়ালন্দ", "Kalukhali / কালুখালী", "Pangsha / পাংশা"],
+      "Shariatpur / শরীয়তপুর": ["Shariatpur Sadar / শরীয়তপুর সদর", "Bhedarganj / ভেদরগঞ্জ", "Damudya / ডামুড্যা", "Gosairhat / গোসাইরহাট", "Naria / নড়িয়া", "Jazira / জাজিরা"],
+      "Madaripur / মাদারীপুর": ["Madaripur Sadar / মাদারীপুর সদর", "Kalkini / কালকিনি", "Rajoir / রাজৈর", "Shibchar / শিবচর"],
+      "Gopalganj / গোপালগঞ্জ": ["Gopalganj Sadar / গোপালগঞ্জ সদর", "Kashiani / কাশিয়ানী", "Kotalipara / কোটালীপাড়া", "Muksudpur / মুকসুদপুর", "Tungipara / টুঙ্গিপাড়া"],
+      "Kishoreganj / কিশোরগঞ্জ": ["Kishoreganj Sadar / কিশোরগঞ্জ সদর", "Bhairab / ভৈরব", "Hossainpur / হোসেনপুর", "Itna / ইতনা", "Karimganj / করিমগঞ্জ", "Katiadi / কটিয়াদী", "Kuliarchar / কুলিয়ারচর", "Mithamain / মিঠামইন", "Nikli / নিকলী", "Pakundia / পাকুন্দিয়া", "Bajitpur / বাজিতপুর", "Austagram / অষ্টগ্রাম", "Tarail / তাড়াইল"],
+      "Tangail / টাঙ্গাইল": ["Tangail Sadar / টাঙ্গাইল সদর", "Basail / বাসাইল", "Bhuapur / ভূঞাপুর", "Delduar / দেলدوয়ার", "Ghatail / ঘাটাইল", "Gopalpur / গোপালপুর", "Kalihati / কালিহাতী", "Madhupur / মধুপুর", "Mirzapur / মির্জাপুর", "Nagarpur / নাগরপুর", "Sakhipur / সখিপুর", "Dhanbari / ধনবাড়ী"],
+      "Chattogram / চট্টগ্রাম": ["Chattogram City / চট্টগ্রাম সিটি", "Anwara / আনোয়ারা", "Banshkhali / বাঁশখালী", "Boalkhali / বোয়ালখালী", "Chandanaish / চন্দনাইশ", "Fatikchhari / ফটিকছড়ি", "Hathazari / হাটহাজারী", "Lohagara / লোহাগাড়া", "Mirsharai / মীরসরাই", "Patiya / পটিয়া", "Rangunia / রাঙ্গুনিয়া", "Raozan / রাউজান", "Sandwip / সন্দ্বীপ", "Satkania / সাতকানিয়া", "Sitakunda / সীতাকুণ্ড", "Karnafuli / কর্ণফুলী"],
+      "Cox's Bazar / কক্সবাজার": ["Cox's Bazar Sadar / সদর", "Chakaria / চকরিয়া", "Kutubdia / কুতুবদিয়া", "Maheshkhali / মহেশখালী", "Ramu / রামু", "Teknaf / টেকনাফ", "Ukhia / উখিয়া", "Pekua / পেকুয়া"],
+      "Cumilla / কুমিল্লা": ["Cumilla Sadar / কুমিল্লা সদর", "Barura / বরুড়া", "Brahmanpara / ব্রাহ্মণপাড়া", "Burichang / বুড়িচং", "Chandina / চান্দিনা", "Chauddagram / চৌদ্দগ্রাম", "Daudkandi / দাউদকান্দি", "Debidwar / দেবিদ্বার", "Homna / হোমনা", "Laksam / লাকসাম", "Muradnagar / মুরাদনগর", "Nangalkot / নাঙ্গলকোট", "Titas / তিতাস", "Meghna / মেঘনা", "Monohargonj / মনোহরগঞ্জ", "Sadarsouth / সদর দক্ষিণ", "Lalmai / লালমাই"],
+      "Brahmanbaria / ব্রাহ্মণবাড়িয়া": ["Brahmanbaria Sadar / সদর", "Ashuganj / আশুগঞ্জ", "Bancharampur / বাঞ্ছারামপুর", "Kasba / কসবা", "Nabinagar / নবীনগর", "Sarail / সরাইল", "Akhaura / আখাউড়া", "Nasirnagar / নাসিরনগর", "Bijoynagar / বিজয়নগর"],
+      "Chandpur / চাঁদপুর": ["Chandpur Sadar / চাঁদপুর সদর", "Faridganj / ফরিদগঞ্জ", "Haimchar / হাইমচর", "Haziganj / হাজীগঞ্জ", "Kachua / কচুয়া", "Matlab North / মতলব উত্তর", "Matlab South / মতলব দক্ষিণ", "Shahrasti / شاه্রাস্তি"],
+      "Feni / ফেনী": ["Feni Sadar / ফেনী সদর", "Chhagalnaiya / ছাগলনাইয়া", "Daganbhuiyan / দাগনভূঞা", "Parshuram / পরশুরাম", "Sonagazi / সোনাগাজী", "Fulgazi / ফুলগাজী"],
+      "Lakshmipur / লক্ষ্মীপুর": ["Lakshmipur Sadar / সদর", "Raipur / রায়পুর", "Ramganj / রামগঞ্জ", "Ramgati / রামগতি", "Kamalnagar / কমলনগর"],
+      "Noakhali / নোয়াখালী": ["Noakhali Sadar / সদর", "Begumganj / বেগমগঞ্জ", "Chatkhil / চাটখিল", "Companiganj / কোম্পানীগঞ্জ", "Hatia / হাতিয়া", "Senbagh / সেণবাগ", "Subarnachar / সুবর্ণচর", "Sonaimuri / সোনাইমুড়ী", "Kabirhat / কবিরহাট"],
+      "Khagrachhari / খাগড়াছড়ি": ["Khagrachhari Sadar / সদর", "Dighinala / দীঘিনালা", "Lakshmichhari / লক্ষ্মীছড়ি", "Mahalchhari / মহালছড়ি", "Manikchhari / মানিকছড়ি", "Matiranga / মাটিরাঙ্গা", "Panchhari / পানছড়ি", "Ramgarh / রামগড়", "Guimara / গুইমারা"],
+      "Rangamati / রাঙ্গামাটি": ["Rangamati Sadar / সদর", "Bgaichhari / বাঘাইছড়ি", "Barkal / বরকল", "Kawkhali / কাউখালী", "Belaichhari / বিলাইছড়ি", "Kaptai / কাপ্তাই", "Juraichhari / জুরাইছড়ি", "Langadu / লংগদু", "Naniyarchar / নানিয়ারচর", "Rajasthali / রাজস্থলী"],
+      "Bandarban / বান্দরবান": ["Bandarban Sadar / সদর", "Alikadam / আলীকদম", "Lama / লামা", "Naikhongchhari / নাইক্ষ্যংছড়ি", "Rowangchhari / রোয়াংছড়ি", "Ruma / রুমা", "Thanchi / থানচি"],
+      "Sylhet / সিলেট": ["Sylhet Sadar / সিলেট সদর", "Beanibazar / বিয়ানীবাজার", "Bishwanath / বিশ্বনাথ", "Fenchuganj / ফেঞ্চুগঞ্জ", "Golapganj / গোলাপগঞ্জ", "Gowainghat / গোয়াইনঘাট", "Jaintiapur / জৈنتাপুর", "Kanaighat / কানাইঘাট", "Balaganj / বালাগঞ্জ", "Companiganj / কোম্পানীগঞ্জ", "Zakiganj / জকিগঞ্জ", "South Surma / দক্ষিণ সুরমা", "Osmaninagar / ওসমানীনগর"],
+      "Moulvibazar / মৌলভীবাজার": ["Moulvibazar Sadar / সদর", "Barlekha / বড়লেখা", "Kamalganj / কমলগঞ্জ", "Kulaura / কুলাউড়া", "Rajnagar / রাজনগর", "Sreemangal / শ্রীমঙ্গল", "Juri / জুড়ী"],
+      "Habiganj / হবিগঞ্জ": ["Habiganj Sadar / সদর", "Bahubal / বাহুবল", "Baniachong / বানিয়াচং", "Chunarughat / চুনারুঘাট", "Lakhai / লাখাই", "Madhabpur / মাধবপুর", "Nabiganj / নবীগঞ্জ", "Ajmiriganj / আজমিরীগঞ্জ", "Shayestaganj / শায়েস্তাগঞ্জ"],
+      "Sunamganj / সুনামগঞ্জ": ["Sunamganj Sadar / সদর", "Bishwambharpur / বিশ্বম্ভরপুর", "Chhatak / ছাতক", "Derai / দিরাই", "Dharampasha / ধর্মপাশা", "Dowarabazar / দোয়ারাবাজার", "Jagannathpur / জগন্নাথপুর", "Jamalganj / জামালগঞ্জ", "Sullah / শাল্লা", "Tahirpur / তাহিরপুর", "Shantiganj / শান্তিগঞ্জ", "Madhyanagar / মধ্যনগর"],
+      "Khulna / খুলনা": ["Khulna City / খুলনা সিটি", "Batiaghata / বটিয়াঘাটা", "Dacope / দাকোপ", "Dumuria / ডুমুরিয়া", "Dighalia / দিঘলিয়া", "Koyra / কয়রা", "Paikgachha / পাইকগাছা", "Phultala / ফুলতলা", "Rupsha / রূপসা", "Terokhada / তেরখাদা"],
+      "Bagerhat / বাগেরহাট": ["Bagerhat Sadar / সদর", "Chitalmari / চিতলমারী", "Fakirhat / ফেরতহাট", "Kachua / কচুয়া", "Mollahat / মোল্লাহাট", "Mongla / মোংলা", "Morrelganj / মোড়েলগঞ্জ", "Rampal / রামপাল", "Sarankhola / শরণখোলা"],
+      "Satkhira / সাতক্ষীরা": ["Satkhira Sadar / সদর", "Assasuni / আশাশুনি", "Kalaroa / কলারোয়া", "Kaliganj / কালীগঞ্জ", "Shyamnagar / শ্যামনগর", "Tala / তালা", "Debhata / দেবহাটা"],
+      "Jashore / যশোর": ["Jashore Sadar / সদর", "Abhaynagar / অভয়নগর", "Bagherpara / বাঘারপাড়া", "Chougachha / চৌগাছা", "Jhikargachha / ঝিকরগাছা", "Manirampur / মণিরামপুর", "Sharsha / শার্শা", "Keshabpur / কেশবপুর"],
+      "Magura / মাগুরা": ["Magura Sadar / সদর", "Mohammadpur / মোহাম্মদপুর", "Shalikha / শালিখা", "Sreepur / শ্রীপুর"],
+      "Narail / নড়াইল": ["Narail Sadar / সদর", "Kalia / কালিয়া", "Lohagara / লোহাগাড়া"],
+      "Kushtia / কুষ্টিয়া": ["Kushtia Sadar / সদর", "Bheramara / ভেড়ামারা", "Daulatpur / দৌলতপুর", "Kumarkhali / কুমারখালী", "Mirpur / মিরপুর", "Khoksa / খোকসা"],
+      "Jhenaidah / ঝিনাইদহ": ["Jhenaidah Sadar / সদর", "Harinakunda / হরিণাকুণ্ড", "Kaliganj / কালীগঞ্জ", "Kotchandpur / কোটচাঁদপুর", "Maheshpur / মহেশপুর", "Shailkupa / শৈলকূপা"],
+      "Chuadanga / চুয়াডাঙ্গা": ["Chuadanga Sadar / সদর", "Alamdanga / আলমডাঙ্গা", "Damurhuda / দামুড়হুদা", "Jibannagar / জীবননগর"],
+      "Meherpur / মেহেরপুর": ["Meherpur Sadar / সদর", "Gangni / গাংনী", "Mujibnagar / মুজিবনগর"],
+      "Barishal / বরিশাল": ["Barishal Sadar / বরিশাল সদর", "Agailjhara / আগৈলঝাড়া", "Babuganj / বাবুগঞ্জ", "Bakerganj / বাকেরগঞ্জ", "Banaripara / বানারীপাড়া", "Gournadi / গৌরনদী", "Hizla / হিজলা", "Muladi / মুলাদী", "Wazirpur / উজিরপুর", "Mehendiganj / মেহেন্দিগঞ্জ"],
+      "Bhola / ভোলা": ["Bhola Sadar / সদর", "Burhanuddin / বোরহানউদ্দিন", "Char Fasson / চরফ্যাশন", "Daulatkhan / দৌলতখান", "Lalmohan / লালমোহন", "Manpura / মনপুরা", "Tazumuddin / তজুমদ্দিন"],
+      "Patuakhali / পটুয়াখালী": ["Patuakhali Sadar / সদর", "Bauphal / বাউফল", "Galachipa / গলাচিপা", "Kalapara / কলাপাড়া", "Dumki / দুমকি", "Dashmina / দশমিনা", "Mirzaganj / মির্জাগঞ্জ", "Rangabali / রাঙ্গাবালী"],
+      "Pirojpur / পিরোজপুর": ["Pirojpur Sadar / সদর", "Bhandaria / ভাণ্ডারিয়া", "Mathbaria / মঠবাড়ীয়া", "Nazirpur / নাজিরপুর", "Nesarabad / নেছারাবাদ", "Kawkhali / কাউখালী", "Indurkani / ইন্দুরকানী"],
+      "Jhalokathi / ঝালকাঠি": ["Jhalokathi Sadar / সদর", "Kathalia / কাঁঠালিয়া", "Nalchity / নলছিটি", "Rajapur / রাজাপুর"],
+      "Barguna / বরগুনা": ["Barguna Sadar / সদর", "Amtali / আমতলী", "Bamna / বামনা", "Betagi / বেতাগী", "Patharghata / পাথরঘাটা", "Taltali / তালতলী"],
+      "Rajshahi / রাজশাহী": ["Rajshahi City / রাজশাহী সিটি", "Bagha / বাঘা", "Bagmara / বাগমারা", "Charghat / চারঘাট", "Durgapur / দুর্গাপুর", "Godagari / গোদাগাড়ী", "Paba / পবা", "Puthia / পুঠিয়া", "Tanore / তানোর", "Mohanpur / মোহনপুর"],
+      "Bogura / বগুড়া": ["Bogura Sadar / বগুড়া সদর", "Adamdighi / আদমদিঘী", "Dhunat / ধুনট", "Dhupchanchia / দুপচাঁচিয়া", "Gabtali / গাবতলী", "Kahaloo / কাহালু", "Sherpur / শেরপুর", "Shibganj / শিবগঞ্জ", "Nandigram / নন্দীগ্রাম", "Sariakandi / সারিয়াকান্দি", "Sonatala / সোনাতলা", "Shajahanpur / শাজাহানপুর"],
+      "Pabna / পাবনা": ["Pabna Sadar / সদর", "Bera / বেড়া", "Chatmohar / চাটমোহর", "Ishwardi / ঈশ্বরদী", "Santhia / সাঁথিয়া", "Atgharia / আটঘরিয়া", "Bhanganagar / ফরিদপুর", "Sujanagar / সুজানগর"],
+      "Natore / নাটোর": ["Natore Sadar / সদর", "Baraigram / বড়াইগ্রাম", "Gurudaspur / গুরুদাসপুর", "Lalpur / লালপুর", "Singra / সিংড়া", "Bagatipara / বাগাতিপাড়া", "Naldanga / নলডাঙ্গা"],
+      "Naogaon / নওগাঁ": ["Naogaon Sadar / সদর", "Manda / মান্দা", "Mohadevpur / মহাদেবপুর", "Patnitala / পত্নীতলা", "Atrai / আত্রাই", "Badalgachhi / বদলগাছী", "Dhamoirhat / ধামইরহাট", "Niamatpur / নিয়ামতপুর", "Porsha / পোরশা", "Raninagar / রাণীনগর", "Sapahar / সাপাহার"],
+      "Sirajganj / সিরাজগঞ্জ": ["Sirajganj Sadar / সদর", "Belkuchi / বেলকুচি", "Shahjadpur / শাহজাদপুর", "Ullahpara / উল্লাপাড়া", "Chauhali / চৌহালী", "Kamarkhanda / কামারখন্দ", "Kazipur / কাজীপুর", "Rayganj / রায়গঞ্জ", "Tarash / তাড়াশ"],
+      "Chapai Nawabganj / চাঁপাইনবাবগঞ্জ": ["Nawabganj Sadar / সদর", "Bholahat / ভোলাহাট", "Gomastapur / গোমস্তাপুর", "Nachole / নাচোল", "Shibganj / শিবগঞ্জ"],
+      "Joypurhat / জয়পুরহাট": ["Joypurhat Sadar / সদর", "Akkelpur / আক্কেলপুর", "Kalai / কালাই", "Khetlal / ক্ষেতলাল", "Panchbibi / পাঁচবিবি"],
+      "Rangpur / রংপুর": ["Rangpur Sadar / রংপুর সদর", "Badarganj / বদরগঞ্জ", "Gangachara / গঙ্গাচড়া", "Kaunia / কাউনিয়া", "Mithapukur / মিঠাপুকুর", "Pirgachha / পীরগাছা", "Pirganj / পীরগঞ্জ", "Taraganj / তারাগঞ্জ"],
+      "Dinajpur / দিনাজপুর": ["Dinajpur Sadar / সদর", "Birganj / বীরগঞ্জ", "Biral / বিরল", "Bochaganj / বোচাগঞ্জ", "Chirirbandar / চিরিরবন্দর", "Phulbari / ফুলবাড়ী", "Parbatipur / পার্বতীপুর", "Hakimpur / হাকিমপুর", "Kaharole / কাহারোল", "Khansama / খানসামা", "Nawabganj / নবাবগঞ্জ", "Ghoraghat / ঘোড়াঘাট"],
+      "Gaibandha / গাইবান্ধা": ["Gaibandha Sadar / সদর", "Gobindaganj / গোবিন্দগঞ্জ", "Palashbari / পলাশবাড়ী", "Sundarganj / সুন্দরগঞ্জ", "Phulchhari / ফুলছড়ি", "Sadullapur / সাদুল্লাপুর", "Saghata / সাঘাটা"],
+      "Kurigram / কুড়িগ্রাম": ["Kurigram Sadar / সদর", "Bhurungamari / ভূরুঙ্গামারী", "Chilmari / চিলমারী", "Phulbari / ফুলবাড়ী", "Nageshwari / নাগেশ্বরী", "Rajarhat / রাজারহাট", "Rajibpur / রাজিবপুর", "Roumari / রৌমারী", "Ulipur / উলিপুর"],
+      "Nilphamari / নীলফামারী": ["Nilphamari Sadar / সদর", "Dimla / ডিমলা", "Domar / ডোমার", "Jaldhaka / জলঢাকা", "Saidpur / সৈয়দপুর", "Kishoreganj / কিশোরগঞ্জ"],
+      "Lalmonirhat / লালমনিরহাট": ["Lalmonirhat Sadar / সদর", "Aditmari / আদিতমারী", "Hatibandha / হাতিবান্ধা", "Kaliganj / কালীগঞ্জ", "Patgram / ্পাটগ্রাম"],
+      "Thakurgaon / ঠাকুরগাঁও": ["Thakurgaon Sadar / সদর", "Baliadangi / বালিয়াডাঙ্গী", "Haripur / হরিপুর", "Pirganj / পীরগঞ্জ", "Ranisankail / রানীশংকৈল"],
+      "Panchagarh / পঞ্চগড়": ["Panchagarh Sadar / সদর", "Atwari / আটোয়ারী", "Boda / বোদা", "Debiganj / দেবীগঞ্জ", "Tetulia / তেঁতুলিয়া"],
+      "Mymensingh / ময়মনসিংহ": ["Mymensingh Sadar / ময়মনসিংহ সদর", "Bhaluka / ভালুকা", "Fulbaria / ফুলবাড়িয়া", "Gaffargaon / গফরগাঁও", "Gouripur / গৌরীপুর", "Muktagachha / মুক্তাগাছা", "Trishal / ত্রিশাল", "Haluaghat / হালুয়াঘাট", "Ishwarganj / ঈশ্বরগঞ্জ", "Nandail / নান্দাইল", "Phulpur / ফুলপুর", "Dhobaura / ধোবাউড়া", "Tarankanda / তারাকান্দা"],
+      "Netrokona / নেত্রকোনা": ["Netrokona Sadar / সদর", "Durgapur / দুর্গাপুর", "Kalmakanda / কলমাকান্দা", "Kendua / কেন্দুয়া", "Mohanganj / মোহনগঞ্জ", "Atpara / আটপাড়া", "Barhatta / বারহাট্টা", "Khaliajuri / খালিয়াজুরী", "Madan / মদন", "Purbadhala / পূর্বধলা"],
+      "Sherpur / শেরপুর": ["Sherpur Sadar / সদর", "Jhenaigati / ঝিনাইগাতী", "Nakla / নকলা", "Nalitabari / নালিতাবাড়ী", "Sreebardi / শ্রীবরদী"],
+      "Jamalpur / জামালপুর": ["Jamalpur Sadar / সদর", "Bakshiganj / বকশীগঞ্জ", "Dewanganj / দেওয়ানগঞ্জ", "Isampur / ইসলামপুর", "Madarganj / মাদারগঞ্জ", "Melandaha / মেলান্দহ", "Sarishabari / সরিষাবাড়ী"]
+    };
+
+    $(document).ready(function() {
+      const distList = $('#district-list');
+      Object.keys(bdData).forEach(dist => distList.append(`<option value="${dist}"></option>`));
+
+      $('#district-input').on('input', function() {
+        const inputVal = $(this).val().trim().toLowerCase();
+        const upaInput = $('#upazila-input');
+        const upaList = $('#upazila-list').empty();
+        
+        upaInput.val('').prop('disabled', true).attr('placeholder', 'আগে জেলা সিলেক্ট করুন');
+
+        let matchedKey = Object.keys(bdData).find(key => key.toLowerCase().includes(inputVal));
+
+        if (matchedKey && inputVal.length > 1) {
+          if (matchedKey.toLowerCase() === inputVal || inputVal.length >= 3) {
+            bdData[matchedKey].forEach(upa => {
+              upaList.append(`<option value="${upa}"></option>`);
+            });
+            upaInput.prop('disabled', false).attr('placeholder', 'খুঁজুন বা লিখুন...');
+          }
+        }
+      });
+
+      $('#district-input').on('blur', function() {
+        const inputVal = $(this).val().trim().toLowerCase();
+        let matchedKey = Object.keys(bdData).find(key => key.toLowerCase().includes(inputVal));
+        if (matchedKey && inputVal.length > 0) {
+          $(this).val(matchedKey);
+          
+          const upaInput = $('#upazila-input');
+          const upaList = $('#upazila-list').empty();
+          bdData[matchedKey].forEach(upa => {
+            upaList.append(`<option value="${upa}"></option>`);
+          });
+          upaInput.prop('disabled', false).attr('placeholder', 'খুঁজুন বা লিখুন...');
+        }
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+        $('#myMenu').click(function(e) { $(this).toggleClass('active'); e.stopPropagation(); });
+        $(document).click(function() { $('#myMenu').removeClass('active'); });
+
+        let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+
+        function renderCart() {
+            let container = $('#cart-items-container').empty();
+            if(!cart.length) { container.html('<p class="text-gray-400 text-center py-8 text-sm">কার্ট খালি আছে</p>'); return updateTotals(); }
+            
+            cart.forEach((p, i) => {
+                let displayName = p.name;
+                let finalSize = p.size || ""; finalSize = finalSize.replace(/[()]/g, ''); 
+                let finalColor = p.color || ""; finalColor = finalColor.replace(/[()]/g, '');
+
+                if (p.name.includes("Size:") || p.name.includes("Color:")) {
+                    let matchSize = p.name.match(/Size:\s*([^,)]+)/);
+                    let matchColor = p.name.match(/Color:\s*([^)]+)/);
+                    if (matchSize) finalSize = matchSize[1].trim();
+                    if (matchColor) finalColor = matchColor[1].trim();
+                    displayName = p.name.split("(Size:")[0].split("Size:")[0].trim();
+                }
+
+                let sizeBadge = finalSize ? `<span class="bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-0.5 rounded border border-gray-200">${finalSize}</span>` : '';
+                let colorBadge = finalColor ? `<span class="bg-blue-50 text-[#0d47a1] text-[11px] font-bold px-2 py-0.5 rounded border border-blue-100">${finalColor}</span>` : '';
+
+                container.append(`
+                    <div class="flex items-center gap-4 py-3.5 border-b border-gray-50 last:border-none">
+                      <img src="${p.image}" class="w-16 h-16 object-cover rounded-xl border border-gray-100 shadow-sm">
+                      <div class="flex-1">
+                        <h4 class="font-bold text-gray-800 text-sm line-clamp-1">${displayName}</h4>
+                        <div class="flex flex-wrap gap-1.5 mt-1">${sizeBadge}${colorBadge}</div>
+                        <p class="text-xs text-gray-400 mt-1">ID: ${p.id}</p>
+                        <p class="text-[#0d47a1] font-bold text-sm mt-0.5">${p.price} ৳</p>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <div class="flex items-center border border-gray-200 rounded-lg bg-gray-50 overflow-hidden">
+                          <button type="button" class="btn-qty px-2.5 py-1.5 font-bold cursor-pointer text-gray-500 hover:bg-gray-100 transition-all" data-id="${i}" data-amt="-1">-</button>
+                          <span class="font-bold text-xs text-gray-800 px-1.5">${p.quantity}</span>
+                          <button type="button" class="btn-qty px-2.5 py-1.5 font-bold cursor-pointer text-gray-500 hover:bg-gray-100 transition-all" data-id="${i}" data-amt="1">+</button>
+                        </div>
+                        <button type="button" class="btn-delete text-red-500 hover:text-red-700 p-2 text-base cursor-pointer transition-colors" data-id="${i}" title="Remove Item">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      </div>
+                    </div>`);
+            });
+            updateTotals();
+        }
+
+        function updateTotals() {
+            let sub = 0, items = 0, txt = "";
+            cart.forEach(p => { 
+                sub += p.price * p.quantity; items += p.quantity; 
+                let displayName = p.name; let finalSize = p.size || ""; let finalColor = p.color || "";
+
+                if (p.name.includes("Size:") || p.name.includes("Color:")) {
+                    let matchSize = p.name.match(/Size:\s*([^,)]+)/); let matchColor = p.name.match(/Color:\s*([^)]+)/);
+                    if (matchSize) finalSize = matchSize[1].trim(); if (matchColor) finalColor = matchColor[1].trim();
+                    displayName = p.name.split("(Size:")[0].split("Size:")[0].trim();
+                }
+
+                let details = [];
+                if(finalSize) details.push(`Size: ${finalSize}`); if(finalColor) details.push(`Color: ${finalColor}`); if(p.image) details.push(`Image: ${p.image}`);
+                let detailsStr = details.length ? ` [${details.join(', ')}]` : '';
+                txt += `${displayName}${detailsStr} (ID: ${p.id}) (${p.quantity}টি) | `; 
+            });
+            
+            $('#cart-count').text(items);
+            let del = cart.length ? (parseInt($('#delivery-option').val()) || 70) : 0;
+            $('#delivery-charge').text(del + ' ৳');
+            $('#sub-total').text(sub + ' ৳');
+            $('#grand-total').text((sub + del) + ' ৳');
+            $('#hidden-product-details').val(txt.replace(/\|\s*$/, ""));
+            $('#hidden-grand-total').val((sub + del) + ' ৳');
+        }
+
+        $(document).on('click', '.btn-qty', function() {
+            let i = $(this).data('id'), amt = $(this).data('amt');
+            cart[i].quantity += amt;
+            if(cart[i].quantity < 1) cart.splice(i, 1);
+            localStorage.setItem("cartProducts", JSON.stringify(cart));
+            renderCart();
+        });
+
+        $(document).on('click', '.btn-delete', function() {
+            let i = $(this).data('id');
+            cart.splice(i, 1);
+            localStorage.setItem("cartProducts", JSON.stringify(cart));
+            renderCart();
+        });
+
+        $('#delivery-option').change(updateTotals);
+        renderCart();
+
+        $('#checkout_form').submit(function(e) {
+            e.preventDefault();
+            if(!cart.length) return alert('আপনার কার্ট খালি!');
+            let btn = $('.confirm-btn').prop('disabled', true).text('অর্ডার প্রসেস হচ্ছে...');
+            $.ajax({ url: $(this).attr('action'), method: 'POST', data: $(this).serialize(), 
+                success: function() { alert('ধন্যবাদ! সফল হয়েছে।'); localStorage.removeItem("cartProducts"); window.location.href = "index.html"; },
+                error: function() { alert('ত্রুটি হয়েছে!'); btn.prop('disabled', false).text('অর্ডার কনফার্ম করুন'); }
+            });
+        });
+    });
+  </script>
+</body>
+</html>

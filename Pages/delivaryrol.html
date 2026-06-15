@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luxury Box BD</title>
+
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+/* =========================
+   BODY
+========================= */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #f5f7fb;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 5%;
+
+  background: #0d47a1;
+  color: white;
+}
+
+.left-nav{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo{
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.logo span{
+  color: #28a745;
+}
+
+.cart{
+  position: relative;
+}
+
+.cart span{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+
+  background: red;
+  color: white;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-container{
+  position: relative;
+}
+
+.menu-trigger{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* DROPDOWN */
+
+.dropdown-menu{
+  position: absolute;
+  top: 130%;
+  left: 0;
+
+  background: white;
+
+  width: 220px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(10px);
+
+  transition: .3s;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+  z-index: 999;
+}
+
+/* ACTIVE MENU */
+
+.menu-container.active .dropdown-menu{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a{
+  display: block;
+  padding: 14px 18px;
+
+  text-decoration: none;
+  color: #111;
+
+  transition: .3s;
+}
+
+.dropdown-menu a:hover{
+  background: #28a745;
+  color: white;
+}
+
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+  margin-top: 70px;
+
+  background: #111111;
+
+  color: white;
+
+  padding: 50px 20px 25px;
+
+}
+
+.footer-container{
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 25px;
+
+}
+
+.footer-menu ul{
+
+  display: flex;
+
+  gap: 25px;
+
+  flex-wrap: wrap;
+
+  list-style: none;
+
+}
+
+.footer-menu a{
+
+  color: white;
+
+  text-decoration: none;
+
+  transition: .3s;
+
+}
+
+.footer-menu a:hover{
+  color: #28a745;
+}
+
+.social_links ul{
+
+  display: flex;
+
+  gap: 15px;
+
+  list-style: none;
+
+}
+
+.social_links a{
+
+  width: 45px;
+  height: 45px;
+
+  background: white;
+
+  color: #0d47a1;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+
+  transition: .3s;
+
+}
+
+.social_links a:hover{
+
+  background: #28a745;
+  color: white;
+
+  transform: scale(1.1);
+
+}
+
+.copyright_text{
+  text-align: center;
+}
+
+.copyright_text a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+
+
+
+
+  .info h3{
+    font-size: 18px;
+  }
+
+  .new{
+    font-size: 22px;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- =========================
+   NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+  <div class="left-nav">
+
+    <div class="menu-container">
+
+      <div class="menu-trigger">
+        <i class="fa-solid fa-bars"></i>
+        <span>Menu</span>
+      </div>
+
+      <div class="dropdown-menu">
+
+        <a href="index.html">Home</a>
+
+        <a href="watch.html">
+          Watch organiser storage box
+        </a>
+
+        <a href="bangles.html">
+          Bangles organiser storage box
+        </a>
+
+        <a href="ring.html">
+          Ring organiser storage box
+        </a>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-search"></i>
+
+  </div>
+
+  <div class="logo">
+    Luxury Box <span>BD</span>
+  </div>
+
+  <div class="cart">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span>0</span>
+  </div>
+
+</nav>
+
+
+
+
+
+
+
+
+<!-- =========================
+   DELIVERY POLICY
+========================= -->
+
+<section
+  style="
+    max-width:1200px;
+    margin:60px auto;
+    padding:0 20px;
+  "
+>
+
+  <div
+    style="
+      background:white;
+      padding:40px;
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    "
+  >
+
+    <h1
+      style="
+        font-size:38px;
+        font-weight:800;
+        color:#0d47a1;
+        margin-bottom:10px;
+      "
+    >
+      Delivery Policy
+    </h1>
+
+    <div
+      style="
+        width:80px;
+        height:4px;
+        background:#28a745;
+        border-radius:20px;
+        margin-bottom:30px;
+      "
+    ></div>
+
+    <p
+      style="
+        font-size:17px;
+        line-height:1.9;
+        color:#444;
+        margin-bottom:30px;
+      "
+    >
+      আমরা সারা বাংলাদেশে নির্ভরযোগ্য কুরিয়ার সার্ভিসের মাধ্যমে
+      পণ্য ডেলিভারি দিয়ে থাকি।
+    </p>
+
+    <!-- DELIVERY TIME -->
+
+    <h3
+      style="
+        font-size:24px;
+        font-weight:700;
+        margin-bottom:18px;
+        color:#111;
+      "
+    >
+      ডেলিভারি সময়সূচি:
+    </h3>
+
+    <ul
+      style="
+        padding-left:22px;
+        line-height:2;
+        color:#444;
+        font-size:17px;
+        margin-bottom:35px;
+      "
+    >
+
+      <li>
+        ঢাকা শহরের ভেতরে: সাধারণত 24–48 কর্মঘন্টার মধ্যে
+      </li>
+
+      <li>
+        ঢাকা শহরের বাইরে: সাধারণত 2–4 কর্মদিবস
+      </li>
+
+    </ul>
+
+    <!-- DELIVERY CHARGE -->
+
+    <h3
+      style="
+        font-size:24px;
+        font-weight:700;
+        margin-bottom:18px;
+        color:#111;
+      "
+    >
+      ডেলিভারি চার্জ:
+    </h3>
+
+    <ul
+      style="
+        padding-left:22px;
+        line-height:2;
+        color:#444;
+        font-size:17px;
+        margin-bottom:35px;
+      "
+    >
+
+      <li>
+        ডেলিভারি চার্জ আপনার লোকেশন অনুযায়ী নির্ধারিত হয়
+      </li>
+
+      <li>
+        অর্ডার কনফার্ম করার সময় ডেলিভারি চার্জ জানিয়ে দেওয়া হয়
+      </li>
+
+    </ul>
+
+    <!-- IMPORTANT INFO -->
+
+    <h3
+      style="
+        font-size:24px;
+        font-weight:700;
+        margin-bottom:18px;
+        color:#111;
+      "
+    >
+      গুরুত্বপূর্ণ তথ্য:
+    </h3>
+
+    <ul
+      style="
+        padding-left:22px;
+        line-height:2;
+        color:#444;
+        font-size:17px;
+      "
+    >
+
+      <li>
+        অর্ডার কনফার্ম করার পর আমাদের টিম আপনার সাথে ফোন বা মেসেজের মাধ্যমে যোগাযোগ করতে পারে
+      </li>
+
+      <li>
+        ডেলিভারির সময় প্রোডাক্ট রিসিভ করার আগে দয়া করে প্যাকেজ চেক করে নিন
+      </li>
+
+    </ul>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========================
+   FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-container">
+
+    <div class="footer-menu">
+
+   <ul>
+          <li><a href="/ourabout.html">আমাদের সম্পর্কে</a></li>
+          <li><a href="/delivaryrol.html">ডেলিভারি পলিসি</a></li>
+          <li><a href="/returnpolisy.html">রিটার্ন পলিসি</a></li>
+        </ul>
+
+    </div>
+
+    <div class="social_links">
+
+      <ul>
+          <li><a class="facebook" target="_blank" href="https://www.facebook.com/share/1HxRwJXoAk/"><i class="fa-brands fa-facebook-f"></i></a></li>
+    
+          <li><a class="instagram" target="_blank" href="https://www.instagram.com/bdluxurybox?igsh=MXZ1MG9pMHJzbnVnMw=="><i class="fa-brands fa-instagram"></i></a></li>
+         
+        </ul>
+
+    </div>
+
+    <div class="copyright_text">
+
+      <p>
+        © 2026
+        <a href="#">
+          Luxury Box BD
+        </a>
+        . All Rights Reserved.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+
+/* =========================
+   MENU TOGGLE
+========================= */
+
+const menuContainer =
+document.querySelector(".menu-container");
+
+const menuTrigger =
+document.querySelector(".menu-trigger");
+
+/* OPEN CLOSE */
+
+menuTrigger.addEventListener(
+"click",
+function(e){
+
+  e.stopPropagation();
+
+  menuContainer.classList.toggle("active");
+
+});
+
+/* OUTSIDE CLICK CLOSE */
+
+document.addEventListener(
+"click",
+function(){
+
+  menuContainer.classList.remove("active");
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Organiser Box - Luxury Box BD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ========================= গ্লোবাল এবং রিসেট স্টাইল ========================= */
+    *{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body{ background: #f5f7fb; }
+    a{ text-decoration: none; color: inherit; transition: .3s; }
+    ul{ list-style: none; display: flex; gap: 25px; flex-wrap: wrap; }
+    
+    /* ========================= নেভিগেশন বার ========================= */
+    .navbar{ display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #0d47a1; color: white; }
+    .left-nav{ display: flex; align-items: center; gap: 20px; }
+    .logo{ font-size: 26px; font-weight: 800; }
+    .logo span{ color: #28a745; }
+    .cart{ position: relative; cursor: pointer; }
+    .cart span{ position: absolute; top: -10px; right: -10px; background: red; color: white; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; display: flex; justify-content: center; align-items: center; }
+
+    /* মেনু এবং ড্রপডাউন */
+    .menu-container{ position: relative; }
+    .menu-trigger{ display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: bold; }
+    .dropdown-menu{ position: absolute; top: 130%; left: 0; background: white; width: 220px; border-radius: 10px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(10px); transition: .3s; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 999; }
+    .menu-container.active .dropdown-menu{ opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a{ display: block; padding: 14px 18px; color: #111; }
+    .dropdown-menu a:hover{ background: #28a745; color: white; }
+
+    /* ========================= প্রোডাক্ট গ্রিড এবং কার্ড ========================= */
+    .products { width: 92%; max-width: 1200px; margin: 40px auto; }
+    .products h2 { text-align: center; margin-bottom: 25px; font-weight: 800; color: #1e293b; font-size: 24px; }
+    
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .product-card { background: white; border-radius: 14px; overflow: hidden; position: relative; transition: .3s; box-shadow: 0 5px 20px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+    .discount { position: absolute; top: 12px; left: 12px; background: red; color: white; padding: 5px 10px; border-radius: 50px; font-size: 12px; font-weight: bold; z-index: 10; }
+    
+    .product-link { display: block; width: 100%; color: inherit; text-decoration: none; }
+    .product-card img { width: 100%; height: 200px; object-fit: cover; background: #fff; display: block; }
+    
+    .info { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .info h3 { font-size: 15px; font-weight: 700; color: #111; min-height: 40px; margin-bottom: 8px; line-height: 1.4; transition: color 0.2s; }
+    .info h3:hover { color: #0d47a1; }
+    .price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+    .old { color: #94a3b8; text-decoration: line-through; font-size: 13px; }
+    .new { color: #0d47a1; font-size: 20px; font-weight: 800; }
+    
+    .selectors { display: flex; gap: 6px; margin-bottom: 12px; }
+    .selectors select { flex: 1; padding: 7px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; color: #334155; background: #f8fafc; outline: none; cursor: pointer; }
+
+    .product-card button { cursor: pointer; background: #0d47a1; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 700; width: 100%; transition: .2s; }
+    .product-card button:hover { background: #28a745; }
+    
+    .details-btn:hover {
+      background: #e2e8f0 !important;
+      color: #28a745 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    /* ========================= ফুটার সেকশন ========================= */
+    footer{ margin-top: 70px; background: #111; color: white; padding: 50px 20px 25px; }
+    .footer-container{ max-width: 1200px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 25px; }
+    .footer-menu a:hover{ color: #28a745; }
+    .social_links ul{ gap: 15px; }
+    .social_links a{ width: 45px; height: 45px; background: white; color: #0d47a1; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+    .social_links a:hover{ background: #28a745; color: white; transform: scale(1.1); }
+    .copyright_text{ text-align: center; }
+
+    /* ========================= মোবাইল রেসপন্সিভ ========================= */
+    @media(max-width:768px){
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .product-card img { height: 150px; }
+      .info { padding: 10px; }
+      .info h3 { font-size: 13px; min-height: 36px; margin-bottom: 6px; }
+      .new { font-size: 16px; }
+      .old { font-size: 12px; }
+      .selectors select { padding: 5px; font-size: 11px; }
+      .product-card button { padding: 10px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="left-nav">
+      <div class="menu-container" id="myMenu">
+        <div class="menu-trigger"><i class="fa-solid fa-bars"></i> <span>Menu</span></div>
+        <div class="dropdown-menu">
+          <a href="../index.html">Home</a>
+          <a href="watch.html">Watch organiser storage box</a>
+          <a href="bangles.html">Bangles organiser storage box</a>
+          <a href="ring.html">Ring organiser storage box</a>
+        </div>
+      </div>
+      <i class="fa-solid fa-search"></i>
+    </div>
+    <div class="logo">Luxury Box <span>BD</span></div>
+    <div class="cart" onclick="window.location.href='../product.html'">
+      <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span>
+    </div>
+  </nav>
+
+  <section class="products">
+    <h2>Watch Organiser Box</h2>
+    <div class="product-grid" id="productContainer"></div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-menu">
+         <ul>
+            <li><a href="../ourabout.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="../delivaryrol.html">ডেলিভারি পলিসি</a></li>
+            <li><a href="../returnpolisy.html">রিটার্ন পলিসি</a></li>
+          </ul>
+      </div>
+      <div class="social_links">
+        <ul>
+            <li><a class="facebook" target="_blank" href="https://www.facebook.com/share/1HxRwJXoAk/"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a class="instagram" target="_blank" href="https://www.instagram.com/bdluxurybox?igsh=MXZ1MG9pMHJzbnVnMw=="><i class="fa-brands fa-instagram"></i></a></li>
+          </ul>
+      </div>
+      <div class="copyright_text">
+        <p>© 2026 <a href="#">Luxury Box BD</a>. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- ১) ওয়াচ প্রোডাক্টের ডাটাবেজ ---
+    const watchData = [
+      { id: 'churi-10-4', img: '../Images/watchbox1.jpeg', name: 'Classic Wooden Watch Box – 6-Slot Organizer with Glass Lid & Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-2', img: '../Images/watchbox2.jpeg', name: 'Classic Wooden Watch Box – 6-Slot Organizer with Glass Lid & Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-3', img: '../Images/watchbox3.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 6 Slot Luxury Organizer with Key Lock', oldP: '2150', newP: '1320', disc: '38', sizes: ['6 Slot'], colors: ['cream','Deep Green','Black','Coffee (Dark Brown)'] },
+      { id: 'watch-4', img: '../Images/watchbox4.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 12 Slot Luxury Organizer with Key Lock', oldP: '2350', newP: '1550', disc: '34', sizes: ['12 Slot'], colors: [' Light Brown'] },
+      { id: 'watch-5', img: '../Images/watchbox5.jpeg', name: 'Premium Quality Brown PU Leather Watch Box – 12 Slot Luxury Organizer with Key Lock', oldP: '2350', newP: '1550', disc: '34', sizes: ['12 Slot'], colors: ['Light Brown'] },
+    ];
+
+    // --- ২) ডাইনামিক প্রোডাক্ট রেন্ডারিং মেকানিজম (../productD.html সেট করা হয়েছে) ---
+    const container = document.getElementById('productContainer');
+    watchData.forEach((p, i) => {
+      container.innerHTML += `
+        <div class="product-card">
+          <div class="discount">-${p.disc}%</div>
+          
+          <a href="../productD.html?id=${p.id}" class="product-link">
+            <img src="${p.img}" alt="Watch Box">
+          </a>
+          
+          <div class="info">
+            <a href="../productD.html?id=${p.id}" class="product-link">
+              <h3>${p.name}</h3>
+            </a>
+            
+            <div class="price"><span class="old">৳${p.oldP}</span><span class="new">৳${p.newP}</span></div>
+            
+            <div class="selectors">
+              <select id="size-${i}">${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
+              <select id="color-${i}">${p.colors.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
+            </div>
+
+            <a href="../productD.html?id=${p.id}" class="details-btn" style="display: block; text-align: center; background: #f1f5f9; color: #0d47a1; border: 1px solid #cbd5e1; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; transition: 0.2s;">
+              <i class="fa-solid fa-eye"></i> বিস্তারিত দেখুন
+            </a>
+            
+            <button onclick="addToCart('${p.id}', '${p.name}', '${p.newP}', '${p.img}', ${i})">Add to Cart</button>
+          </div>
+        </div>`;
+    });
+
+    // --- ৩) মেনু টগল স্ক্রিপ্ট ---
+    const menuContainer = document.getElementById("myMenu");
+    if(menuContainer){
+      menuContainer.addEventListener("click", function(e){
+        e.stopPropagation();
+        menuContainer.classList.toggle("active");
+      });
+    }
+    document.addEventListener("click", function(){
+      if(menuContainer) menuContainer.classList.remove("active");
+    });
+
+    // --- ৪) অ্যাড টু কার্ট ফাংশন ---
+    function addToCart(id, name, price, image, i) {
+      let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+      let size = document.getElementById(`size-${i}`).value;
+      let color = document.getElementById(`color-${i}`).value;
+      
+      let exist = cart.find(item => item.id === id && item.size === size && item.color === color);
+      if (exist) { 
+        exist.quantity += 1; 
+      } else { 
+        cart.push({ id, name, price: parseInt(price), image, size, color, quantity: 1 }); 
+      }
+      
+      localStorage.setItem("cartProducts", JSON.stringify(cart));
+      updateCartCount();
+      alert('কার্টে যোগ হয়েছে!');
+    }
+
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+      document.getElementById('cart-count').innerText = cart.reduce((t, item) => t + item.quantity, 0);
+    }
+    window.onload = updateCartCount;
+  </script>
+</body>
+</html>
