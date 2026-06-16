@@ -25,12 +25,13 @@
     .cart-icon-wrapper:hover { opacity: 0.8; }
     .cart-badge { position: absolute; top: -2px; right: -2px; background: #ff3838; color: white; font-size: 11px; font-weight: 700; border-radius: 50px; padding: 2px 6px; min-width: 18px; text-align: center; line-height: 1; border: 2px solid #0d47a1; }
 
-    /* === ৩) মেইন লেআউট (ডেস্কটপ গ্রিড) === */
-    .container { max-width: 1200px; margin: 30px auto; padding: 0 4%; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-    .product-image-section { background: white; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; display: flex; justify-content: center; align-items: center; }
-    .product-image-section img { max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; }
+   /* === ৩) মেইন লেআউট (ডেস্কটপ গ্রিড) === */
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 4%; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+    .product-image-section { background: white; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; display: flex; justify-content: center; align-items: center; min-height: 450px; }
+    .product-image-section img { max-width: 100%; max-height: 500px; object-fit: contain; border-radius: 8px; transition: transform 0.3s ease; }
+    .product-image-section img:hover { transform: scale(1.02); }
     
-    /* === ৪) প্রোডাক্ট ইনফো ও প্রাইসিং === */
+  /* === ৪) প্রোডাক্ট ইনফো ও প্রাইসিং === */
     .product-info-section { background: white; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; }
     .product-title { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 12px; }
     .price-area { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
@@ -62,56 +63,50 @@
     .desc-content li::before { content: "✔"; color: #28a745; font-weight: bold; }
     .dynamic-size-box { background: #f0fdf4; border: 1px dashed #28a745; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-weight: bold; color: #166534; display: inline-block; }
 
-    /* === ৮) বিশেষ মোবাইল রেসপন্সিভ মিডিয়া কোয়েরি (ছবি ছোট এবং টাইটেল একপাশে) === */
+   /* ৮) মোবাইল রেসপন্সিভ মিডিয়া কোয়েরি */
     @media(max-width: 768px) {
       .navbar { padding: 12px 4%; }
       .logo { font-size: 20px; }
       
-      /* কন্টেইনার ফ্লেক্সিবল করা হলো যাতে ভেতরে সবকিছু সিঙ্গেল কলামে সাজানো যায় */
-      .container { display: flex; flex-direction: column; gap: 12px; margin: 10px auto; padding: 0 3%; }
+      /* মেইন কন্টেইনারকে সিঙ্গেল কলামে সেট করা */
+      .container { 
+          display: flex; 
+          flex-direction: column; 
+          gap: 15px; 
+          margin: 15px auto; 
+          padding: 0 4%; 
+      }
       
-      /* ছবি এবং টাইটেল পাশাপাশি আনার জন্য একটি ফ্লেক্স রো জেনারেট করা হয়েছে */
-      .product-info-section { padding: 12px; display: flex; flex-direction: column; gap: 10px; border-radius: 12px; }
+      /* ছবি বড় করার জন্য */
+      .product-image-section { 
+          width: 100%; 
+          padding: 15px; 
+          height: auto; 
+          min-height: 250px; 
+          border-radius: 12px; 
+          background: white;
+      }
+      .product-image-section img { 
+          max-height: 350px; 
+          width: 100%; 
+          object-fit: contain; 
+      }
       
-      /* মেইন ইমেজ সেকশনকে উপরে পাশাপাশি দেখানোর জন্য রো লেআউট */
-      .container { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      /* প্রোডাক্ট ইনফো ও টেক্সট */
+      .product-info-section { 
+          padding: 15px; 
+          border-radius: 12px; 
+      }
+      .product-title { font-size: 18px; line-height: 1.4; }
       
-      /* উপরের অংশ: ইমেজ ও টাইটেল পাশাপাশি করার জন্য একটি কম্বাইন্ড গ্রিড বা ট্রিক ব্যবহার */
-      .container { display: flex; flex-direction: column; }
+      /* ড্রপডাউন ও বাটন */
+      .option-group select { max-width: 100%; padding: 10px; }
+      .btn-group { max-width: 100%; gap: 10px; }
+      .btn-group button { padding: 14px 10px; }
       
-      /* এখানে আমরা ডাইনামিক স্টাইল শিফট ব্যবহার করছি: ছবি ও টেক্সট এরিয়া এক বক্সে রেন্ডার করার মতো লুক দেওয়া হয়েছে */
-      .product-image-section { background: white; padding: 10px; border-radius: 12px; width: 40%; float: left; margin-right: 3%; height: 140px; box-sizing: border-box; }
-      .product-image-section img { max-height: 120px; object-fit: contain; }
-      
-      /* ডাইনামিক পাশাপাশি লুকের জন্য সিএসএস গ্রিড ফিক্স */
-      .container { display: grid; grid-template-columns: 120px 1fr; gap: 12px; background: white; padding: 12px; border-radius: 14px; margin: 15px 3% 5px; border: 1px solid #e2e8f0; }
-      .product-image-section { background: transparent; padding: 0; border: none; width: 100%; height: 120px; }
-      .product-image-section img { max-height: 120px; width: 100%; }
-      
-      /* প্রোডাক্ট ইনফো সেকশন এবার ডানপাশে টাইটেল ও প্রাইস দেখাবে */
-      .product-info-section { background: transparent; padding: 0; border: none; justify-content: center; }
-      .product-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-      .price-area { margin-bottom: 0; gap: 6px; flex-wrap: wrap; }
-      .new-price { font-size: 18px; }
-      .old-price { font-size: 12px; }
-      .discount-badge { font-size: 10px; padding: 2px 6px; }
-      
-      /* ড্রপডাউন এবং বাটনগুলোকে ছবির নিচ থেকে ফুল উইডথ করার জন্য আরেকটি কন্টেইনার হিসেবে রেন্ডার করা */
-      /* এগুলো যাতে গ্রিডের বাইরে নিচে ফুল স্ক্রিন পায় সেজন্য গ্রিড কলাম স্প্যান করা হলো */
-      .option-group, .btn-group { grid-column: span 2; }
-      .option-group { margin-bottom: 10px; }
-      .option-group label { font-size: 12px; margin-bottom: 4px; }
-      .option-group select { padding: 8px; font-size: 13px; max-width: 100%; }
-      
-      .btn-group { gap: 8px; margin-top: 10px; max-width: 100%; }
-      .btn-group button { padding: 12px 6px; font-size: 13px; border-radius: 6px; }
-      
-      /* ডেসক্রিপশন সেকশন মোবাইল ফ্রেন্ডলি */
-      .description-section { margin: 10px auto; padding: 0 3%; }
-      .description-box { padding: 15px; border-radius: 12px; }
-      .description-box h2 { font-size: 15px; margin-bottom: 10px; }
-      .desc-content { font-size: 13px; line-height: 1.6; }
-      .dynamic-size-box { font-size: 12px; padding: 6px 10px; }
+      /* ডেসক্রিপশন সেকশন */
+      .description-section { padding: 0 4%; }
+      .description-box { padding: 15px; }
     }
   </style>
 </head>

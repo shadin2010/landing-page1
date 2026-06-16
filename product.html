@@ -92,10 +92,13 @@
               <input type="text" name="Name" required placeholder="আপনার সম্পূর্ণ নাম লিখুন" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800">
             </div>
 
-            <div>
-              <label class="block text-gray-600 text-sm font-semibold mb-1.5">মোবাইল নাম্বার <span class="text-red-500">*</span></label>
-              <input type="tel" name="Mobile" required placeholder="যেমন: 017XXXXXXXX" class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800">
-            </div>
+           <div>
+  <label class="block text-gray-600 text-sm font-semibold mb-1.5">মোবাইল নাম্বার <span class="text-red-500">*</span></label>
+  <input type="tel" name="Mobile" id="mobile-input" required placeholder="01XXXXXXXXX" 
+         class="w-full p-3 border border-gray-200 rounded-xl outline-none input-4d bg-white text-gray-800"
+         pattern="01[3-9][0-9]{8}" maxlength="11" oninput="validatePhone(this)">
+  <p id="phone-error" class="text-red-500 text-xs mt-1 hidden">সঠিক ১১ ডিজিটের মোবাইল নাম্বার লিখুন (যেমন: 017XXXXXXXX)</p>
+</div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -178,6 +181,39 @@
       <div class="copyright_text"><p><i class="fa-regular fa-copyright"></i> 2026 <a href="http://127.0.0.1:5500/index.html" target="_blank">Luxury Box BD</a>. All Rights Reserved.</p></div>
     </div>
   </footer>
+
+
+<script>
+// মোবাইল নাম্বার ভ্যালিডেশন ফাংশন
+function validatePhone(input) {
+    const errorMsg = document.getElementById('phone-error');
+    const value = input.value;
+    
+    // শুধু নাম্বার রাখা
+    input.value = value.replace(/[^0-9]/g, '');
+    
+    // ভ্যালিডেশন চেক (১১ ডিজিট এবং 01 দিয়ে শুরু)
+    const isValid = /^01[3-9][0-9]{8}$/.test(input.value);
+    
+    if (input.value.length > 0 && !isValid) {
+        errorMsg.classList.remove('hidden');
+        input.style.borderColor = "#ef4444";
+    } else {
+        errorMsg.classList.add('hidden');
+        input.style.borderColor = "#e5e7eb";
+    }
+}
+
+// ফর্ম সাবমিট করার সময় চেক
+document.getElementById('checkout_form').addEventListener('submit', function(e) {
+    const mobileInput = document.getElementById('mobile-input').value;
+    if (!/^01[3-9][0-9]{8}$/.test(mobileInput)) {
+        e.preventDefault();
+        alert("অনুগ্রহ করে সঠিক ১১ ডিজিটের মোবাইল নাম্বার প্রদান করুন।");
+    }
+});
+</script>
+
 
   <script>
     const bdData = {
