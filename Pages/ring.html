@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ring Organiser Box - Luxury Box BD</title>
+  
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '988687827415836');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=988687827415836&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -108,7 +127,7 @@
     </div>
   </nav>
 
-  <!-- প্রোডাক্ট সেকশন (শিরোনাম রিং বক্স অনুযায়ী আপডেট করা হয়েছে) -->
+  <!-- প্রোডাক্ট সেকশন (শিরোনাম রিং বক্স অনুযায়ী আপডেট করা হয়েছে) -->
   <section class="products">
     <h2>Ring Organiser Box</h2>
     <div class="product-grid" id="productContainer"></div>
@@ -118,7 +137,7 @@
   <footer>
     <div class="footer-container">
       <div class="footer-menu">
-         <ul>
+          <ul>
             <li><a href="ourabout.html">আমাদের সম্পর্কে</a></li>
             <li><a href="delivaryrol.html">ডেলিভারি পলিসি</a></li>
             <li><a href="returnpolisy.html">রিটার্ন পলিসি</a></li>
@@ -137,7 +156,7 @@
   </footer>
 
   <script>
-    // --- ১) রিং প্রোডাক্টের ডাটাবেজ (পাথ ও ইউনিক আইডি ঠিক করা হয়েছে) ---
+    // --- ১) রিং প্রোডাক্টের ডাটাবেজ (পাথ ও ইউনিক আইডি ঠিক করা হয়েছে) ---
     const ringData = [
       { id: 'ring-1', img: '../Images/ringbox1.jpeg', name: 'Premium Quality 6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
       { id: 'ring-2', img: '../Images/ringbox2.jpeg', name: '6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
@@ -145,7 +164,7 @@
       { id: 'ring-4', img: '../Images/ringbox4.jpeg', name: '6 Slot Ring Storage Box', oldP: '750', newP: '490', disc: '34', sizes: ['6 Slot'], colors: ['Black' ,'Maroon' ,'Cream/Off-white'] },
     ];
 
-    // --- ২) ডাইনামিক প্রোডাক্ট রেন্ডারিং মেকানিজম (../productD.html সেট করা হয়েছে) ---
+    // --- ২) ডাইনামিক প্রোডাক্ট রেন্ডারিং মেকানিজম (../productD.html সেট করা হয়েছে) ---
     const container = document.getElementById('productContainer');
     ringData.forEach((p, i) => {
       container.innerHTML += `
@@ -170,7 +189,7 @@
               <select id="color-${i}">${p.colors.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
             </div>
 
-            <!-- বিস্তারিত দেখুন বাটন (যা ফোল্ডারের বাইরে productD.html কে পয়েন্ট করবে) -->
+            <!-- বিস্তারিত দেখুন বাটন (যা ফোল্ডারের বাইরে productD.html কে পয়েন্ট করবে) -->
             <a href="../productD.html?id=${p.id}" class="details-btn" style="display: block; text-align: center; background: #f1f5f9; color: #0d47a1; border: 1px solid #cbd5e1; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; transition: 0.2s;">
               <i class="fa-solid fa-eye"></i> বিস্তারিত দেখুন
             </a>
@@ -207,6 +226,16 @@
       
       localStorage.setItem("cartProducts", JSON.stringify(cart));
       updateCartCount();
+      
+      // Facebook Pixel AddToCart Event
+      fbq('track', 'AddToCart', {
+        content_name: name,
+        content_ids: [id],
+        content_type: 'product',
+        value: price,
+        currency: 'BDT'
+      });
+
       alert('কার্টে যোগ হয়েছে!');
     }
 

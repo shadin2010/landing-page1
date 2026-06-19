@@ -6,6 +6,25 @@
   <title>Bangles Organiser Box - Luxury Box BD</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '988687827415836');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=988687827415836&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
   <style>
     /* ========================= গ্লোবাল এবং রিসেট স্টাইল ========================= */
     *{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -119,13 +138,13 @@
             <li><a href="ourabout.html">আমাদের সম্পর্কে</a></li>
             <li><a href="delivaryrol.html">ডেলিভারি পলিসি</a></li>
             <li><a href="returnpolisy.html">রিটার্ন পলিসি</a></li>
-          </ul>
+         </ul>
       </div>
       <div class="social_links">
         <ul>
             <li><a class="facebook" target="_blank" href="https://www.facebook.com/share/1HxRwJXoAk/"><i class="fa-brands fa-facebook-f"></i></a></li>
             <li><a class="instagram" target="_blank" href="https://www.instagram.com/bdluxurybox?igsh=MXZ1MG9pMHJzbnVnMw=="><i class="fa-brands fa-instagram"></i></a></li>
-          </ul>
+        </ul>
       </div>
       <div class="copyright_text">
         <p>© 2026 <a href="#">Luxury Box BD</a>. All Rights Reserved.</p>
@@ -134,52 +153,43 @@
   </footer>
 
   <script>
-    // --- ১) ব্যাঙ্গেলস প্রোডাক্টের ডাটাবেজ (পাথ ঠিক করা হয়েছে) ---
     const banglesData = [
       { id: 'bangle-4', img: '../Images/coribox1.jpeg', name: 'Premium 5 Roll Bangle Organizer Box – Velvet Interior & Glass Top (Red)', oldP: ' 2250', newP: '1560', disc: '30', sizes: ['5 Roll'], colors: ['red', 'Cream'] },
       { id: 'bangle-3', img: '../Images/coribox2.jpeg', name: '5 Roll Velvet Bangle Organizer Box with Glass Top | Cream Color', oldP: '2250', newP: '1560', disc: '30', sizes: ['5 Roll'], colors: ['Cream', 'Red'] },
       { id: 'bangle-5', img: '../Images/coribox3.jpeg', name: 'Premium 4 Roll Bangle Organizer Box', oldP: '1990', newP: '1290', disc: ' 35', sizes: ['4 Roll'], colors: ['Maroon', 'Black'] },
       { id: 'churi-10-1', img: '../Images/coribox4.jpeg', name: 'Premium 4 Roll Bangle Organizer Box with Black & Off-white', oldP: '1990', newP: '1290', disc: '35', sizes: ['4 Roll'], colors: ['Black & Off-white'] },
       { id: 'churi-10-2', img: '../Images/coribox5.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top | Cream Color', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Roll'], colors: ['Cream '] },
-      { id: 'churi-10-3', img: '../Images/coribox6.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Roll'], colors: ['red' , 'Cream'] },
-      { id: 'churi-7', img: '../Images/coribox7.jpeg', name: '3 Roll Velvet Bangle Organizer Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Row'], colors: ['red'] },
+      { id: 'churi-10-3', img: '../Images/coribox6.jpeg', name: '3 Roll Velvet Bangle Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Roll'], colors: ['red' , 'Cream'] },
+      { id: 'churi-7', img: '../Images/coribox7.jpeg', name: '3 Roll Velvet Bangle Box with Glass Top', oldP: '1790', newP: '1120', disc: '37', sizes: ['3 Row'], colors: ['red'] },
       { id: 'churi-8', img: '../Images/coribox8.jpeg', name: 'Premium Single Roll Bangle Organizer Box – Velvet Interior & Glass Top', oldP: '990', newP: '750', disc: '24', sizes: ['Single Roll'], colors: [ 'Red'] },
       { id: 'churi-9', img: '../Images/coribox9.jpeg', name: 'Premium Single Roll Bangle Organizer Box – Velvet Interior & Glass Top', oldP: '990', newP: '750', disc: '24', sizes: ['Single Roll'], colors: ['Red', 'White'] },
     ];
 
-    // --- ২) ডাইনামিক প্রোডাক্ট রেন্ডারিং মেকানিজম (../productD.html সেট করা হয়েছে) ---
     const container = document.getElementById('productContainer');
     banglesData.forEach((p, i) => {
       container.innerHTML += `
         <div class="product-card">
           <div class="discount">-${p.disc}%</div>
-          
           <a href="../productD.html?id=${p.id}" class="product-link">
             <img src="${p.img}" alt="Bangles Box">
           </a>
-          
           <div class="info">
             <a href="../productD.html?id=${p.id}" class="product-link">
               <h3>${p.name}</h3>
             </a>
-            
             <div class="price"><span class="old">৳${p.oldP}</span><span class="new">৳${p.newP}</span></div>
-            
             <div class="selectors">
               <select id="size-${i}">${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
               <select id="color-${i}">${p.colors.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
             </div>
-
             <a href="../productD.html?id=${p.id}" class="details-btn" style="display: block; text-align: center; background: #f1f5f9; color: #0d47a1; border: 1px solid #cbd5e1; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; transition: 0.2s;">
               <i class="fa-solid fa-eye"></i> বিস্তারিত দেখুন
             </a>
-            
             <button onclick="addToCart('${p.id}', '${p.name}', '${p.newP}', '${p.img}', ${i})">Add to Cart</button>
           </div>
         </div>`;
     });
 
-    // --- ৩) মেনু টগল স্ক্রিপ্ট ---
     const menuContainer = document.getElementById("myMenu");
     if(menuContainer){
       menuContainer.addEventListener("click", function(e){
@@ -191,7 +201,6 @@
       if(menuContainer) menuContainer.classList.remove("active");
     });
 
-    // --- ৪) অ্যাড টু কার্ট ফাংশন ---
     function addToCart(id, name, price, image, i) {
       let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
       let size = document.getElementById(`size-${i}`).value;
@@ -206,6 +215,16 @@
       
       localStorage.setItem("cartProducts", JSON.stringify(cart));
       updateCartCount();
+      
+      // Facebook AddToCart Event
+      fbq('track', 'AddToCart', {
+        content_name: name,
+        content_ids: [id],
+        content_type: 'product',
+        value: price,
+        currency: 'BDT'
+      });
+      
       alert('কার্টে যোগ হয়েছে!');
     }
 
